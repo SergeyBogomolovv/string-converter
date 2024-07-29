@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["jest", "node"],
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "ESNext",
