@@ -1,7 +1,6 @@
 import "webpack-dev-server";
-import { buildWebpack } from "./config/webpack";
 import path from "path";
-import { BuildMode, BuildPlatform } from "./config/webpack";
+import { BuildMode, BuildPlatform, buildWebpack } from "./config/webpack";
 import { config } from "dotenv";
 
 interface Environment {

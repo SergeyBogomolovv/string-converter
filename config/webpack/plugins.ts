@@ -1,4 +1,3 @@
-import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -23,14 +22,10 @@ export function buildPlugins({
     }),
     new ForkTsCheckerWebpackPlugin(),
     new HotModuleReplacementPlugin(),
+    new ESLintPlugin(),
   ];
   if (mode === "development") {
-    return [
-      ...plugins,
-      new ProgressPlugin(),
-      new ReactRefreshWebpackPlugin(),
-      new ESLintPlugin(),
-    ];
+    return [...plugins, new ProgressPlugin(), new ReactRefreshWebpackPlugin()];
   }
   if (mode === "production") {
     return [...plugins, new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()];
