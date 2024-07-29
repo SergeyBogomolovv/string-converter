@@ -10,6 +10,7 @@ import {
 import { BuildOptions } from "./types/types";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ESLintPlugin from "eslint-webpack-plugin";
+import StylelintPlugin from "stylelint-webpack-plugin";
 
 export function buildPlugins({
   mode,
@@ -23,6 +24,7 @@ export function buildPlugins({
     new ForkTsCheckerWebpackPlugin(),
     new HotModuleReplacementPlugin(),
     new ESLintPlugin(),
+    new StylelintPlugin(),
   ];
   if (mode === "development") {
     return [...plugins, new ProgressPlugin(), new ReactRefreshWebpackPlugin()];
