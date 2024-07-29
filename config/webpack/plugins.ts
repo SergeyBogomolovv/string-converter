@@ -1,3 +1,4 @@
+import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -19,7 +20,7 @@ export function buildPlugins({
   const plugins: Configuration["plugins"] = [
     new HtmlWebpackPlugin({
       template: paths.html,
-      // favicon: path.resolve(paths.public, "favicon.ico"),
+      favicon: path.resolve(paths.public, "favicon.ico"),
     }),
     new ForkTsCheckerWebpackPlugin(),
     new HotModuleReplacementPlugin(),
