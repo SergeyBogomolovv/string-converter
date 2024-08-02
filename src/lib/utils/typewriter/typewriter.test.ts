@@ -4,7 +4,7 @@ jest.setTimeout(10000);
 
 describe("Typewriter", () => {
   test("base usage", async () => {
-    const delay = 200;
+    const delay = 100;
     let word = "";
     const testWord1 = "gerax";
     const testWord2 = "fn";
@@ -23,7 +23,7 @@ describe("Typewriter", () => {
   });
 
   test("usage after time reached", async () => {
-    const delay = 200;
+    const delay = 100;
     let word = "";
     const testWord1 = "ge";
     const testWord2 = "nom";
@@ -36,7 +36,7 @@ describe("Typewriter", () => {
     await new Promise((res) => setTimeout(res, testWord1.length * delay + 200));
     expect(word).toBe(testWord1);
     write(testWord2);
-    await new Promise((res) => setTimeout(res, testWord2.length * delay + 5));
+    await new Promise((res) => setTimeout(res, testWord2.length * delay + 10));
     expect(word).toBe(expectedWord);
   });
 

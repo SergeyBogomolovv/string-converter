@@ -1,0 +1,1 @@
+export { typeWriter } from "./typewriter";

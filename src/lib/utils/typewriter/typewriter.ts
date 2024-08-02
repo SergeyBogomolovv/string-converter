@@ -1,4 +1,4 @@
-export function typeWriter(delay: number, outputChar: (char: string) => void) {
+export function typeWriter(delay: number, outputChar: (char: string) => any) {
   let queue = Promise.resolve();
   return (text: string) => {
     for (const char of text) {
