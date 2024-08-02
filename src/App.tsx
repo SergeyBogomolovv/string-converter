@@ -10,13 +10,12 @@ const App = () => {
   });
 
   useEffect(() => {
-    setStats(
-      textCounter(val, {
-        charsCount: true,
-        wordsCount: true,
-        mostUsedWords: true,
-      })
-    );
+    const stats = textCounter(val, {
+      charsCount: true,
+      wordsCount: true,
+      mostUsedWords: true,
+    });
+    setStats(stats);
   }, [val]);
 
   return (
@@ -38,7 +37,7 @@ const App = () => {
               <p>Использовано: {stat.count}</p>
               <h3>Вариации:</h3>
               <ul>
-                {stat.variations.map((variation) => (
+                {[...stat.variations].map((variation) => (
                   <li key={variation}>{variation}</li>
                 ))}
               </ul>

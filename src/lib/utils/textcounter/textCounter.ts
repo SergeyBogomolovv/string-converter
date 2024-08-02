@@ -2,40 +2,38 @@ import { TextCounterOptions, TextCounterResult, WordUsageStats } from "./types";
 
 export function textCounter(
   text: string,
-  options: Partial<TextCounterOptions> = {
-    wordsCount: true,
-    mostUsedWords: true,
-    charsCount: false,
-  }
+  {
+    wordsCount = true,
+    mostUsedWords = false,
+    charsCount = true,
+  }: Partial<TextCounterOptions>
 ): TextCounterResult {
-  if (options.charsCount || options.mostUsedWords || options.wordsCount) {
+  if (charsCount || mostUsedWords || wordsCount) {
     text = text
-      .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "")
+      .replace(/[.,/#!$%^&*;:{}=\-_`~+"'@()]/g, "")
       .trim()
       .replace(/\s+/g, " ");
   }
-
-  const words = text.split(" ");
-
+  const words = text.length > 0 ? text.split(" ") : [];
   const result: TextCounterResult = {};
 
-  if (options.charsCount) {
+  if (charsCount) {
     result.charsCount = text.split("").filter((char) => char !== " ").length;
   }
 
-  if (options.wordsCount) {
+  if (wordsCount) {
     result.wordsCount = words.length;
   }
 
-  if (options.mostUsedWords) {
+  if (mostUsedWords) {
     const wordsUsage = words.reduce((wordsUsage, word) => {
       const key = word.toLowerCase();
 
-      const variations = wordsUsage.get(key)?.variations || [];
-      if (!variations.includes(word)) variations.push(word);
+      const variations = wordsUsage.get(key)?.variations || new Set();
+      variations.add(word);
 
       const newValue = {
-        word,
+        word: word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
         variations,
         count: (wordsUsage.get(key)?.count || 0) + 1,
       };
@@ -47,16 +45,13 @@ export function textCounter(
     const stats: WordUsageStats[] = [];
 
     for (const stat of wordsUsage.values()) {
-      stats.push(stat);
+      if (stat.count > 1) stats.push(stat);
     }
 
     stats.sort((statA, statB) => statB.count - statA.count);
 
-    if (
-      typeof options.mostUsedWords === "number" &&
-      options.mostUsedWords > 0
-    ) {
-      result.mostUsedWords = stats.slice(0, options.mostUsedWords);
+    if (typeof mostUsedWords === "number" && mostUsedWords > 0) {
+      result.mostUsedWords = stats.slice(0, mostUsedWords);
     } else {
       result.mostUsedWords = stats;
     }
