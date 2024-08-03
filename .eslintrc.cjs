@@ -16,6 +16,7 @@ module.exports = {
       typescript: {},
     },
   },
+  ignores: ["node_modules", "dist", ".eslintrc.cjs"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
