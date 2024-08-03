@@ -9,12 +9,14 @@ const App = () => {
     mostUsedWords: [],
   });
 
+  const count = textCounter({
+    charsCount: true,
+    wordsCount: true,
+    mostUsedWords: true,
+  });
+
   useEffect(() => {
-    const stats = textCounter(val, {
-      charsCount: true,
-      wordsCount: true,
-      mostUsedWords: true,
-    });
+    const stats = count(val);
     setStats(stats);
   }, [val]);
 

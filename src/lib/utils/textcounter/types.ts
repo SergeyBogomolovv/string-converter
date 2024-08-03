@@ -15,3 +15,5 @@ export type TextCounterResult = {
   mostUsedWords?: WordUsageStats[];
   charsCount?: number;
 };
+
+export type TextCounterFn = (text: string) => TextCounterResult;
