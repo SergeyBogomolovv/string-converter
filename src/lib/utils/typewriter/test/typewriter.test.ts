@@ -1,3 +1,4 @@
+import { wait } from "@/lib/helpers/wait";
 import { typeWriter } from "../typewriter";
 import {
   baseWord1,
@@ -22,7 +23,7 @@ describe("Typewriter", () => {
     write(baseWord2);
 
     for (let i = 0; i < expectedBaseWord.length; i++) {
-      await new Promise((res) => setTimeout(res, delay10));
+      await wait(delay10);
       expect(word).toBe(expectedBaseWord.slice(0, i));
     }
   });
@@ -34,14 +35,10 @@ describe("Typewriter", () => {
     }
     const write = typeWriter(delay10, outputChar);
     write(baseWord1);
-    await new Promise((res) =>
-      setTimeout(res, baseWord1.length * delay10 + delay20)
-    );
+    await wait(baseWord1.length * delay10 + delay20);
     expect(word).toBe(baseWord1);
     write(baseWord2);
-    await new Promise((res) =>
-      setTimeout(res, (baseWord2.length + 1) * delay10)
-    );
+    await wait((baseWord2.length + 1) * delay10);
     expect(word).toBe(expectedBaseWord);
   });
 
@@ -52,13 +49,21 @@ describe("Typewriter", () => {
     }
     const write = typeWriter(delay10, outputChar);
     write(secondWord1);
-    await new Promise((res) => setTimeout(res, 50));
+    await wait(50);
     write(secondWord2);
-    await new Promise((res) => setTimeout(res, 270));
+    await wait(270);
     write(secondWord3);
-    await new Promise((res) =>
-      setTimeout(res, expectedSecondWord.length * delay10)
-    );
+    await wait(expectedSecondWord.length * delay10);
     expect(word).toBe(expectedSecondWord);
+  });
+
+  test("should handle zero delay correctly", async () => {
+    let word = "";
+    const write = typeWriter(0, (char) => {
+      word += char;
+    });
+    write(baseWord1);
+    await wait(10);
+    expect(word).toBe(baseWord1);
   });
 });

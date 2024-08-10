@@ -1,3 +1,4 @@
+import { wait } from "@/lib/helpers/wait";
 import { textWriter } from "../textwriter";
 import { duration1000, testValue } from "./mocks";
 
@@ -8,7 +9,7 @@ describe("TextWriter", () => {
       text += char;
     });
     expect(text).not.toBe(testValue);
-    await new Promise((res) => setTimeout(res, duration1000));
+    await wait(duration1000);
     expect(text).toBe(testValue);
   });
 
@@ -20,7 +21,7 @@ describe("TextWriter", () => {
       text += char;
     });
     for (let i = 0; i < testValue.length; i++) {
-      await new Promise((res) => setTimeout(res, time));
+      await wait(time);
       expect(text).toBe(testValue.slice(0, i));
     }
   });
