@@ -1,10 +1,12 @@
 module.exports = {
-  extends: ["stylelint-config-standard", "stylelint-config-css-modules"],
+  extends: [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-order"
+  ],
   plugins: ["stylelint-order"],
-  ignoreFiles: ["node_modules", "dist"],
+  ignoreFiles: ["node_modules/**", "dist/**"],
   rules: {
-    indentation: 2,
-    "string-quotes": "single",
     "color-hex-length": "short",
     "order/properties-alphabetical-order": true,
     "block-no-empty": true,
