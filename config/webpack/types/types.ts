@@ -1,16 +1,14 @@
-interface BuildPaths {
+export interface Paths {
   entry: string;
-  html: string;
-  output: string;
+  dist: string;
   src: string;
   public: string;
 }
 
-export type BuildMode = "production" | "development";
-export type BuildPlatform = "mobile" | "desktop";
+export interface ProdOptions {
+  paths: Paths;
+}
 
-export interface BuildOptions {
+export interface DevOptions extends ProdOptions {
   port: number;
-  paths: BuildPaths;
-  mode?: BuildMode;
 }
