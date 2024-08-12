@@ -26,7 +26,7 @@ describe("Typewriter", () => {
     write(baseWord1);
     write(baseWord2);
 
-    for (let i = 0; i < expectedBaseWord.length; i++) {
+    for (let i = 0; i < expectedBaseWord.length + 1; i++) {
       await wait(delay10);
       expect(word).toBe(expectedBaseWord.slice(0, i));
     }
