@@ -2,9 +2,13 @@ import { wait } from "@/lib/helpers/wait";
 import { textWriter } from "../textwriter";
 import { duration1000, testValue } from "./mocks";
 
+let text = "";
+
+beforeEach(() => {
+  text = "";
+});
 describe("TextWriter", () => {
   test("should output characters in a given time", async () => {
-    let text = "";
     textWriter(duration1000, testValue, (char) => {
       text += char;
     });
@@ -14,7 +18,6 @@ describe("TextWriter", () => {
   });
 
   test("should work as expected", async () => {
-    let text = "";
     const delay = duration1000 / testValue.length;
     const time = delay - delay / testValue.length;
     textWriter(duration1000, testValue, (char) => {

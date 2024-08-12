@@ -12,9 +12,13 @@ import {
   secondWord3,
 } from "./mocks";
 
+let word = "";
+beforeEach(() => {
+  word = "";
+});
+
 describe("Typewriter", () => {
   test("base usage", async () => {
-    let word = "";
     function outputChar(char: string) {
       word += char;
     }
@@ -29,7 +33,6 @@ describe("Typewriter", () => {
   });
 
   test("usage after time reached", async () => {
-    let word = "";
     function outputChar(char: string) {
       word += char;
     }
@@ -43,7 +46,6 @@ describe("Typewriter", () => {
   });
 
   test("different time calls", async () => {
-    let word = "";
     function outputChar(char: string) {
       word += char;
     }
@@ -58,7 +60,6 @@ describe("Typewriter", () => {
   });
 
   test("should handle zero delay correctly", async () => {
-    let word = "";
     const write = typeWriter(0, (char) => {
       word += char;
     });

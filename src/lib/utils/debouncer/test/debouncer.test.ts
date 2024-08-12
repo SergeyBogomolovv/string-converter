@@ -1,8 +1,12 @@
 import { debouncer } from "../debouncer";
+let expectedWord = "";
+
+beforeEach(() => {
+  expectedWord = "";
+});
 
 describe("Debouncer", () => {
   test("should debounce function", async () => {
-    let expectedWord = "";
     function testFn(txt: string) {
       expectedWord = txt;
     }
@@ -16,7 +20,6 @@ describe("Debouncer", () => {
   });
 
   test("should not change value", async () => {
-    let expectedWord = "";
     function testFn(txt: string) {
       expectedWord = txt;
     }
