@@ -1,29 +1,22 @@
-import { merge } from "webpack-merge";
-import commonConfig from "./common";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { Configuration } from "webpack";
+import type { Configuration } from "webpack";
+import type { ProdOptions } from "./types/types";
+import baseConfig from "./base";
+import prodPlugins from "./plugins/prod.plugins";
+import prodLoaders from "./loaders/prod.loaders";
 
-const prodConfig: Configuration = {
-  mode: "production",
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-    ],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
-  ],
-  optimization: {
-    splitChunks: {
-      chunks: "all",
+export default function prodConfig(options: ProdOptions): Configuration {
+  return {
+    ...baseConfig(options.paths),
+    mode: "production",
+    plugins: prodPlugins(options.paths),
+    module: {
+      rules: prodLoaders,
     },
-    runtimeChunk: "single",
-  },
-};
-
-export default merge(commonConfig, prodConfig);
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+      },
+      runtimeChunk: "single",
+    },
+  };
+}
