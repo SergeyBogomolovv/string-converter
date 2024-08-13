@@ -4,10 +4,13 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import basePlugins from "./base.plugins";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
-export default function prodPlugins(paths: Paths): Configuration["plugins"] {
+export default function prodPlugins(
+  paths: Paths,
+  analyze: boolean
+): Configuration["plugins"] {
   return [
     ...basePlugins(paths),
     new MiniCssExtractPlugin(),
-    new BundleAnalyzerPlugin(),
-  ];
+    analyze && new BundleAnalyzerPlugin(),
+  ].filter(Boolean);
 }

@@ -13,5 +13,5 @@ const paths: Paths = {
 export default () => {
   return process.env.MODE === "development"
     ? devConfig({ paths, port: Number(process.env.PORT) })
-    : prodConfig({ paths });
+    : prodConfig({ paths, analyze: Boolean(process.env.ANALYZE) });
 };

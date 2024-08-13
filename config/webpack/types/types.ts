@@ -4,11 +4,13 @@ export interface Paths {
   src: string;
   public: string;
 }
-
-export interface ProdOptions {
+interface BaseOptions {
   paths: Paths;
 }
+export interface ProdOptions extends BaseOptions {
+  analyze: boolean;
+}
 
-export interface DevOptions extends ProdOptions {
+export interface DevOptions extends BaseOptions {
   port: number;
 }

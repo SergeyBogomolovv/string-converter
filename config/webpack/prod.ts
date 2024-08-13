@@ -8,7 +8,7 @@ export default function prodConfig(options: ProdOptions): Configuration {
   return {
     ...baseConfig(options.paths),
     mode: "production",
-    plugins: prodPlugins(options.paths),
+    plugins: prodPlugins(options.paths, options.analyze),
     module: {
       rules: prodLoaders,
     },
