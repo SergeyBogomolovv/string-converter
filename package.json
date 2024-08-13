@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.tsx",
   "scripts": {
-    "dev": "webpack serve",
-    "build": "webpack",
+    "dev": "cross-env MODE=development webpack serve",
+    "build": "cross-env MODE=production webpack",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
     "lint:styles": "stylelint '**/*.{css,scss}'",
     "format": "prettier --write .",
@@ -30,6 +30,7 @@
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "eslint": "^8.57.0",
     "eslint-import-resolver-typescript": "^3.6.1",
