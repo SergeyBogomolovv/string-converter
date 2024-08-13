@@ -13,10 +13,12 @@ module.exports = {
       node: {
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
-      typescript: {},
+      typescript: {
+        project: "./tsconfig.json",
+      },
     },
   },
-  ignores: ["node_modules", "dist", ".eslintrc.cjs"],
+  ignorePatterns: ["node_modules", "dist", ".eslintrc.cjs"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -42,5 +44,6 @@ module.exports = {
     "no-html-link-for-pages": "off",
     "react-refresh/only-export-components": "off",
     "@typescript-eslint/no-var-requires": "off",
+    "no-unused-vars": "off",
   },
 };
