@@ -21,7 +21,7 @@ const App = () => {
   }, [val]);
 
   return (
-    <div>
+    <main>
       <input
         type="text"
         value={val}
@@ -47,7 +47,7 @@ const App = () => {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

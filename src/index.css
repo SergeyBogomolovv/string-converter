@@ -1,0 +1,6 @@
+main {
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
