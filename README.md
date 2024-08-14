@@ -1,5 +1,7 @@
 # String Converter
 
+[Посмотреть проект](https://string-converter.vercel.app)
+
 ### Этот проект нацелен в первую очередь на:
 
 - Прокачивание моих скиллов работы со строками в javascript
