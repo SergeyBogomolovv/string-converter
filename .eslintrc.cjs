@@ -45,5 +45,6 @@ module.exports = {
     "react-refresh/only-export-components": "off",
     "@typescript-eslint/no-var-requires": "off",
     "no-unused-vars": "off",
+    "react/prop-types": "off",
   },
 };
