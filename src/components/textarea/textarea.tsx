@@ -1,13 +1,25 @@
 import type { TextareaHTMLAttributes } from "react";
 import styles from "./textarea.module.css";
 import clsx from "clsx";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 
 export const Textarea = ({
   onChange,
   ...props
 }: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const adjustTextareaHeight = useCallback(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, []);
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [adjustTextareaHeight]);
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -30,6 +42,7 @@ export const Textarea = ({
 
         requestAnimationFrame(() => {
           textarea.selectionStart = textarea.selectionEnd = start + 1;
+          adjustTextareaHeight();
         });
       } else if (
         (event.ctrlKey && event.key === "x") ||
@@ -56,6 +69,7 @@ export const Textarea = ({
 
           requestAnimationFrame(() => {
             textarea.selectionStart = textarea.selectionEnd = previousLineEnd;
+            adjustTextareaHeight();
           });
         } else {
           textarea.value = value.substring(0, start) + value.substring(end);
@@ -63,10 +77,14 @@ export const Textarea = ({
             ...event,
             target: textarea,
           } as React.ChangeEvent<HTMLTextAreaElement>);
+
+          requestAnimationFrame(() => {
+            adjustTextareaHeight();
+          });
         }
       }
     },
-    [onChange]
+    [onChange, adjustTextareaHeight]
   );
 
   return (
@@ -76,7 +94,10 @@ export const Textarea = ({
       onKeyDown={handleKeyDown}
       placeholder="Введите текст..."
       {...props}
-      onChange={onChange}
+      onChange={(e) => {
+        adjustTextareaHeight();
+        onChange?.(e);
+      }}
       className={clsx(styles.container, props.className)}
     />
   );
