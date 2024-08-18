@@ -1,4 +1,4 @@
-import { Editor } from "@/widgets/editor";
+import { Editor } from "@/features/editor";
 
 const App = () => {
   return (

@@ -1,23 +1,29 @@
 import styles from "./editor.module.css";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { Textarea, TextContent } from "@/components/textarea";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  disableEditMode,
+  enableEditMode,
+  setHeight,
+  setValue,
+} from "@/features/editor";
 
 export const Editor = () => {
-  const [editMode, setEditMode] = useState(true);
-  const [value, setValue] = useState("");
-  const [height, setHeight] = useState("auto");
+  const { editMode, value, height } = useAppSelector((state) => state.editor);
+  const dispatch = useAppDispatch();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
+    dispatch(setValue(e.target.value));
   };
 
   const adjustHeight = useCallback(() => {
     if (textareaRef.current) {
       const textareaHeight = textareaRef.current.scrollHeight;
-      setHeight(`${textareaHeight}px`);
+      dispatch(setHeight(`${textareaHeight}px`));
     }
   }, []);
 
@@ -35,7 +41,7 @@ export const Editor = () => {
       {editMode ? (
         <Textarea
           ref={textareaRef}
-          onBlur={() => setEditMode(false)}
+          onBlur={() => dispatch(disableEditMode())}
           value={value}
           onChange={(e) => {
             handleChange(e);
@@ -46,7 +52,7 @@ export const Editor = () => {
       ) : (
         <TextContent
           ref={contentRef}
-          onClick={() => setEditMode(true)}
+          onClick={() => dispatch(enableEditMode())}
           style={{
             whiteSpace: "pre-wrap",
             wordBreak: "break-word",

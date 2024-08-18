@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 
 export const Textarea = forwardRef(
   (
-    { onChange, style, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>,
+    { onChange, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>,
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     const internalRef = useRef<HTMLTextAreaElement | null>(null);
@@ -104,7 +104,6 @@ export const Textarea = forwardRef(
         onKeyDown={handleKeyDown}
         placeholder="Введите текст..."
         {...props}
-        style={{ ...style }}
         onChange={(e) => {
           adjustTextareaHeight();
           onChange?.(e);
