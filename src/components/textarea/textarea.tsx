@@ -1,83 +1,118 @@
-import type { TextareaHTMLAttributes } from "react";
-import styles from "./textarea.module.css";
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  forwardRef,
+} from "react";
+import type { TextareaHTMLAttributes, ForwardedRef } from "react";
 import clsx from "clsx";
-import React, { useCallback, useRef } from "react";
+import styles from "./styles.module.css";
 
-export const Textarea = ({
-  onChange,
-  ...props
-}: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+export const Textarea = forwardRef(
+  (
+    { onChange, style, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>,
+    ref: ForwardedRef<HTMLTextAreaElement>
+  ) => {
+    const internalRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      const textarea = textareaRef.current;
-      if (!textarea) return;
+    useImperativeHandle(ref, () => internalRef.current);
 
-      if (event.key === "Tab") {
-        event.preventDefault();
+    const adjustTextareaHeight = useCallback(() => {
+      const textarea = internalRef.current;
+      if (textarea) {
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+      }
+    }, []);
 
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const value = textarea.value;
+    useEffect(() => {
+      adjustTextareaHeight();
+    }, [adjustTextareaHeight]);
 
-        textarea.value =
-          value.substring(0, start) + "\t" + value.substring(end);
-        onChange?.({
-          ...event,
-          target: textarea,
-        } as React.ChangeEvent<HTMLTextAreaElement>);
+    const handleKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        const textarea = internalRef.current;
+        if (!textarea) return;
 
-        requestAnimationFrame(() => {
-          textarea.selectionStart = textarea.selectionEnd = start + 1;
-        });
-      } else if (
-        (event.ctrlKey && event.key === "x") ||
-        (event.metaKey && event.key === "x")
-      ) {
-        event.preventDefault();
+        if (event.key === "Tab") {
+          event.preventDefault();
 
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const value = textarea.value;
-
-        if (start === end) {
-          const startLine = value.lastIndexOf("\n", start - 1) + 1;
-          const endLine = value.indexOf("\n", start);
-          const previousLineEnd = startLine - 1;
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          const value = textarea.value;
 
           textarea.value =
-            value.substring(0, startLine) +
-            value.substring(endLine === -1 ? value.length : endLine + 1);
+            value.substring(0, start) + "\t" + value.substring(end);
           onChange?.({
             ...event,
             target: textarea,
           } as React.ChangeEvent<HTMLTextAreaElement>);
 
           requestAnimationFrame(() => {
-            textarea.selectionStart = textarea.selectionEnd = previousLineEnd;
+            textarea.selectionStart = textarea.selectionEnd = start + 1;
+            adjustTextareaHeight();
           });
-        } else {
-          textarea.value = value.substring(0, start) + value.substring(end);
-          onChange?.({
-            ...event,
-            target: textarea,
-          } as React.ChangeEvent<HTMLTextAreaElement>);
-        }
-      }
-    },
-    [onChange]
-  );
+        } else if (
+          (event.ctrlKey && event.key === "x") ||
+          (event.metaKey && event.key === "x")
+        ) {
+          event.preventDefault();
 
-  return (
-    <textarea
-      ref={textareaRef}
-      data-testid="textareael"
-      onKeyDown={handleKeyDown}
-      placeholder="Введите текст..."
-      {...props}
-      onChange={onChange}
-      className={clsx(styles.container, props.className)}
-    />
-  );
-};
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          const value = textarea.value;
+
+          if (start === end) {
+            const startLine = value.lastIndexOf("\n", start - 1) + 1;
+            const endLine = value.indexOf("\n", start);
+            const previousLineEnd = startLine - 1;
+
+            textarea.value =
+              value.substring(0, startLine) +
+              value.substring(endLine === -1 ? value.length : endLine + 1);
+            onChange?.({
+              ...event,
+              target: textarea,
+            } as React.ChangeEvent<HTMLTextAreaElement>);
+
+            requestAnimationFrame(() => {
+              textarea.selectionStart = textarea.selectionEnd = previousLineEnd;
+              adjustTextareaHeight();
+            });
+          } else {
+            textarea.value = value.substring(0, start) + value.substring(end);
+            onChange?.({
+              ...event,
+              target: textarea,
+            } as React.ChangeEvent<HTMLTextAreaElement>);
+
+            requestAnimationFrame(() => {
+              textarea.selectionStart = textarea.selectionEnd = start;
+              adjustTextareaHeight();
+            });
+          }
+        }
+      },
+      [onChange, adjustTextareaHeight]
+    );
+
+    return (
+      <textarea
+        ref={internalRef}
+        data-testid="textareael"
+        onKeyDown={handleKeyDown}
+        placeholder="Введите текст..."
+        {...props}
+        style={{ ...style }}
+        onChange={(e) => {
+          adjustTextareaHeight();
+          onChange?.(e);
+        }}
+        className={clsx(styles.container, props.className)}
+      />
+    );
+  }
+);
+
+Textarea.displayName = "Textarea";
