@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/shared/store/hooks";
 import { Paper } from "@mui/material";
 
 export const Textcontent = () => {

@@ -1,4 +1,4 @@
-import { wait } from "@/lib/helpers/wait";
+import { wait } from "@/shared/helpers/wait";
 import { textWriter } from "../textwriter";
 import { duration1000, testValue } from "./mocks";
 

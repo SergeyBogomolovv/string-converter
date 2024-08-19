@@ -1,6 +1,6 @@
 import { fireEvent } from "@testing-library/react";
 import { Textarea } from "../ui/textarea";
-import { renderWithRedux } from "@/store";
+import { renderWithRedux } from "@/shared/store";
 
 describe("Textarea Component", () => {
   it("renders correctly", () => {

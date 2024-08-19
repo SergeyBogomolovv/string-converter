@@ -1,5 +1,5 @@
 import { setValue } from "@/entities/editor";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useCallback, useEffect, useRef } from "react";
 
 export const useTextArea = (

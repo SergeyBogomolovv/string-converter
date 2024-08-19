@@ -1,4 +1,4 @@
-import { Highlited } from "@/lib/utils/highliter";
+import { Highlited } from "@/shared/utils/highliter";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 

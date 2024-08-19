@@ -1,6 +1,6 @@
 import { setHighlighted, setSearchTarget } from "@/entities/editor";
-import { highliter } from "@/lib/utils/highliter";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { highliter } from "@/shared/utils/highliter";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useEffect } from "react";
 
 export const useSearch = () => {

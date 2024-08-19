@@ -1,4 +1,4 @@
-import { wait } from "@/lib/helpers/wait";
+import { wait } from "@/shared/helpers/wait";
 import { typeWriter } from "../typewriter";
 import {
   baseWord1,

@@ -5,7 +5,7 @@ import {
   setSearchTarget,
 } from "../model/slice";
 import type { EditorState } from "../model/slice";
-import { Highlited } from "@/lib/utils/highliter";
+import { Highlited } from "@/shared/utils/highliter";
 
 describe("editorSlice", () => {
   const initialState: EditorState = {
