@@ -6,12 +6,14 @@ export interface EditorState {
   value: string;
   highlighted: Highlited;
   searchTarget: string;
+  editMode: boolean;
 }
 
 const initialState: EditorState = {
   value: "",
   highlighted: [],
   searchTarget: "",
+  editMode: true,
 };
 
 export const editorSlice = createSlice({
@@ -27,10 +29,13 @@ export const editorSlice = createSlice({
     setSearchTarget: (state, action: PayloadAction<string>) => {
       state.searchTarget = action.payload;
     },
+    setEditMode: (state, action: PayloadAction<boolean>) => {
+      state.editMode = action.payload;
+    },
   },
 });
 
-export const { setValue, setHighlighted, setSearchTarget } =
+export const { setValue, setHighlighted, setSearchTarget, setEditMode } =
   editorSlice.actions;
 
 export default editorSlice.reducer;

@@ -6,10 +6,15 @@ export const Textcontent = () => {
 
   return (
     <Paper
+      elevation={0}
       sx={{
+        tabSize: 4,
+        minHeight: "10rem",
         whiteSpace: "pre-wrap",
         wordBreak: "break-word",
         padding: "1rem",
+        lineHeight: "1.5",
+        letterSpacing: "0.05rem",
       }}
     >
       {...highlighted}

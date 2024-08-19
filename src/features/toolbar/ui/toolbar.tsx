@@ -4,10 +4,12 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import AbcIcon from "@mui/icons-material/Abc";
 import { SearchInput } from "./search-input";
+import { EditModeToggle } from "./edit-mode-toggle";
 
 export const Toolbar = () => {
   return (
     <Stack spacing={1} direction="row">
+      <EditModeToggle />
       <SearchInput />
       <Button startIcon={<AssessmentIcon />} variant="contained">
         Статистика

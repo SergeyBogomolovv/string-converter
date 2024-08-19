@@ -3,6 +3,7 @@ import {
   setValue,
   setHighlighted,
   setSearchTarget,
+  setEditMode,
 } from "../model/slice";
 import type { EditorState } from "../model/slice";
 import { Highlited } from "@/shared/utils/highliter";
@@ -12,11 +13,18 @@ describe("editorSlice", () => {
     value: "",
     highlighted: [],
     searchTarget: "",
+    editMode: true,
   };
 
   it("должен вернуть начальное состояние", () => {
     const state = editorSlice.reducer(undefined, { type: undefined });
     expect(state).toEqual(initialState);
+  });
+
+  it("должен установить editMode при вызове setEditMode", () => {
+    const action = setEditMode(true);
+    const state = editorSlice.reducer(initialState, action);
+    expect(state.editMode).toEqual(true);
   });
 
   it("должен установить value при вызове setValue", () => {
