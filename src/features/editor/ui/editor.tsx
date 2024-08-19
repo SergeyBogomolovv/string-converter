@@ -1,66 +1,82 @@
-import styles from "./editor.module.css";
-import { useEffect, useRef, useCallback } from "react";
 import { Textarea, TextContent } from "@/components/textarea";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  disableEditMode,
-  enableEditMode,
-  setHeight,
-  setValue,
-} from "@/features/editor";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import { useEditMode } from "../model/use-edit-mode";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import SearchIcon from "@mui/icons-material/Search";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import AbcIcon from "@mui/icons-material/Abc";
+import { IconButton, InputBase, Paper } from "@mui/material";
 
 export const Editor = () => {
-  const { editMode, value, height } = useAppSelector((state) => state.editor);
-  const dispatch = useAppDispatch();
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setValue(e.target.value));
-  };
-
-  const adjustHeight = useCallback(() => {
-    if (textareaRef.current) {
-      const textareaHeight = textareaRef.current.scrollHeight;
-      dispatch(setHeight(`${textareaHeight}px`));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (editMode && textareaRef.current) {
-      const textarea = textareaRef.current;
-      textarea.focus();
-      textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
-      adjustHeight;
-    }
-  }, [editMode, adjustHeight]);
+  const {
+    contentRef,
+    textareaRef,
+    handleChange,
+    value,
+    height,
+    editMode,
+    disableEditMode,
+    enableEditMode,
+    adjustHeight,
+  } = useEditMode();
 
   return (
-    <div className={styles.container}>
-      {editMode ? (
-        <Textarea
-          ref={textareaRef}
-          onBlur={() => dispatch(disableEditMode())}
-          value={value}
-          onChange={(e) => {
-            handleChange(e);
-            adjustHeight();
+    <Stack spacing={3} width="70%" margin="auto">
+      <Stack spacing={1} direction="row">
+        <Paper
+          component="form"
+          sx={{
+            width: "27%",
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
           }}
-          style={{ height }}
-        />
-      ) : (
-        <TextContent
-          ref={contentRef}
-          onClick={() => dispatch(enableEditMode())}
-          style={{
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-            height,
-          }}
-          dangerouslySetInnerHTML={{ __html: value.replace(/\n/g, "<br />") }}
-        />
-      )}
-    </div>
+        >
+          <IconButton sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+          <InputBase
+            sx={{ width: "100%" }}
+            placeholder="Поиск"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Paper>
+        <Button startIcon={<AssessmentIcon />} variant="contained">
+          Статистика
+        </Button>
+        <Button startIcon={<EditNoteIcon />} variant="contained">
+          Замена слов
+        </Button>
+        <Button startIcon={<AbcIcon />} variant="contained">
+          Сгененировать
+        </Button>
+      </Stack>
+      <div>
+        {editMode ? (
+          <Textarea
+            ref={textareaRef}
+            onBlur={disableEditMode}
+            value={value}
+            onChange={(e) => {
+              handleChange(e);
+              adjustHeight();
+            }}
+            style={{ height }}
+          />
+        ) : (
+          <TextContent
+            ref={contentRef}
+            onClick={enableEditMode}
+            style={{
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              height,
+            }}
+            dangerouslySetInnerHTML={{ __html: value.replace(/\n/g, "<br />") }}
+          />
+        )}
+      </div>
+    </Stack>
   );
 };
