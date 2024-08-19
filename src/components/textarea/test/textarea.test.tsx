@@ -1,5 +1,5 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { Textarea } from "./textarea";
+import { Textarea } from "../ui/textarea";
 
 describe("Textarea component", () => {
   it("should insert a tab character when Tab is pressed", () => {

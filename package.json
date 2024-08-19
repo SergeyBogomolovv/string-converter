@@ -66,6 +66,11 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/inter": "^5.0.20",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
     "@reduxjs/toolkit": "^2.2.7",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",

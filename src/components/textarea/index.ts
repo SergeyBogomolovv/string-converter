@@ -1,2 +1,2 @@
-export { Textarea } from "./textarea";
-export { TextContent } from "./textcontent";
+export { Textarea } from "./ui/textarea";
+export { TextContent } from "./ui/textcontent";
