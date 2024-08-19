@@ -1,8 +1,9 @@
+import styles from "./App.module.css";
 import { Editor } from "@/widgets/editor";
 
 const App = () => {
   return (
-    <main>
+    <main className={styles.container}>
       <Editor />
     </main>
   );

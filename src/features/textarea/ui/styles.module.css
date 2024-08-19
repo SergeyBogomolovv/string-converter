@@ -1,0 +1,21 @@
+.container {
+  background-color: white;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  line-height: 1.5;
+  min-height: 10rem;
+  padding: 1rem;
+  resize: none;
+  tab-size: 4;
+  width: 100%;
+}
+
+.container:focus {
+  outline: none;
+}
+
+.container::placeholder {
+  color: var(--color-foreground);
+}
