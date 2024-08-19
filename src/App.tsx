@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { Editor } from "@/features/editor";
+import { Editor } from "@/widgets/editor";
 
 const App = () => {
   return (

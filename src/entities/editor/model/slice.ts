@@ -1,16 +1,17 @@
+import { Highlited } from "@/lib/utils/highliter";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface EditorState {
   value: string;
-  editMode: boolean;
-  height: string;
+  highlighted: Highlited;
+  searchTarget: string;
 }
 
 const initialState: EditorState = {
   value: "",
-  editMode: true,
-  height: "auto",
+  highlighted: [],
+  searchTarget: "",
 };
 
 export const editorSlice = createSlice({
@@ -20,19 +21,16 @@ export const editorSlice = createSlice({
     setValue: (state, action: PayloadAction<string>) => {
       state.value = action.payload;
     },
-    setHeight: (state, action: PayloadAction<string>) => {
-      state.height = action.payload;
+    setHighlighted: (state, action: PayloadAction<Highlited>) => {
+      state.highlighted = action.payload;
     },
-    enableEditMode: (state) => {
-      state.editMode = true;
-    },
-    disableEditMode: (state) => {
-      state.editMode = true;
+    setSearchTarget: (state, action: PayloadAction<string>) => {
+      state.searchTarget = action.payload;
     },
   },
 });
 
-export const { setValue, enableEditMode, disableEditMode, setHeight } =
+export const { setValue, setHighlighted, setSearchTarget } =
   editorSlice.actions;
 
 export default editorSlice.reducer;

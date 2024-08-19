@@ -1,4 +1,4 @@
-import editorReducer from "@/features/editor";
+import editorReducer from "@/entities/editor";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({

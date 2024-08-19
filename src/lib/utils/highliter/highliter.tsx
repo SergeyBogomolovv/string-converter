@@ -21,3 +21,5 @@ export const highliter = (
     )
   );
 };
+
+export type Highlited = ReturnType<typeof highliter>;
