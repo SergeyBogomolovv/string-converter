@@ -1,11 +1,18 @@
-import { setHighlighted, setSearchTarget } from "@/entities/editor";
+import {
+  getEditorSearchTargetSelector,
+  getEditorValueSelector,
+  setHighlighted,
+  setSearchTarget,
+} from "@/entities/editor";
 import { highliter } from "@/shared/utils/highliter";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useEffect } from "react";
 
 export const useSearch = () => {
   const dispatch = useAppDispatch();
-  const { searchTarget, value } = useAppSelector((state) => state.editor);
+  const value = useAppSelector(getEditorValueSelector);
+  const searchTarget = useAppSelector(getEditorSearchTargetSelector);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

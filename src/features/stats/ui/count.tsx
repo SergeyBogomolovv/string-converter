@@ -1,9 +1,10 @@
 import { useAppSelector } from "@/shared/store/hooks";
 import { Stack, Typography } from "@mui/material";
-import { statsSelector } from "../model/selectors";
+import { charsCountSelector, wordsCountSelector } from "../model/selectors";
 
 export const Count = () => {
-  const { wordsCount, charsCount } = useAppSelector(statsSelector);
+  const charsCount = useAppSelector(charsCountSelector);
+  const wordsCount = useAppSelector(wordsCountSelector);
 
   return (
     <Stack>

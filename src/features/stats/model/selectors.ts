@@ -6,4 +6,8 @@ export const showWordsCountSelector = (state: RootState) =>
 export const mostUsedWordsSelector = (state: RootState) =>
   state.stats.stats.mostUsedWords;
 
-export const statsSelector = (state: RootState) => state.stats.stats;
+export const wordsCountSelector = (state: RootState) =>
+  state.stats.stats.wordsCount;
+
+export const charsCountSelector = (state: RootState) =>
+  state.stats.stats.charsCount;
