@@ -2,10 +2,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import { useSearch } from "../model/use-search";
 import { useAppSelector } from "@/shared/store/hooks";
+import { selectEditMode } from "@/entities/editor";
 
 export const SearchInput = () => {
   const { handleChange, searchTarget } = useSearch();
-  const { editMode } = useAppSelector((state) => state.editor);
+  const editMode = useAppSelector(selectEditMode);
   return (
     <Paper
       component="form"

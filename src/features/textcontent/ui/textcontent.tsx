@@ -1,11 +1,13 @@
+import { selectHighlited } from "@/entities/editor";
 import { useAppSelector } from "@/shared/store/hooks";
 import { Paper } from "@mui/material";
 
 export const Textcontent = () => {
-  const { highlighted } = useAppSelector((state) => state.editor);
+  const highlighted = useAppSelector(selectHighlited);
 
   return (
     <Paper
+      data-testid={"textcontendel"}
       elevation={0}
       sx={{
         tabSize: 4,
