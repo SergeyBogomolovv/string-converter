@@ -1,10 +1,13 @@
-import { RootState } from "@/shared/store";
+import { EditorState } from "./slice";
 
-export const selectEditorValue = (state: RootState) => state.editor.value;
+export const selectEditorValue = (state: { editor: EditorState }) =>
+  state.editor.value;
 
-export const selectEditMode = (state: RootState) => state.editor.editMode;
+export const selectEditMode = (state: { editor: EditorState }) =>
+  state.editor.editMode;
 
-export const selectSearchTarget = (state: RootState) =>
+export const selectSearchTarget = (state: { editor: EditorState }) =>
   state.editor.searchTarget;
 
-export const selectHighlited = (state: RootState) => state.editor.highlighted;
+export const selectHighlited = (state: { editor: EditorState }) =>
+  state.editor.highlighted;
