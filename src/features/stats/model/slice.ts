@@ -7,7 +7,7 @@ export interface StatsState {
   stats: TextCounterResult;
 }
 
-const initialState: StatsState = {
+export const initialState: StatsState = {
   showWordsCount: 5,
   stats: { wordsCount: 0, charsCount: 0, mostUsedWords: [] },
 };
