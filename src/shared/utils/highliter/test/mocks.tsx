@@ -11,6 +11,7 @@ export const textExamples = {
   multipleOccurrencesText: "This simple text has simple words",
   russianText: "Это простой текст для тестирования",
   russianMultipleOccurrencesText: "Этот текст простой, но простой текст важен",
+  withSpecialSymbols: "console.log()",
 };
 
 export const targets = {
@@ -18,9 +19,17 @@ export const targets = {
   absent: "absent",
   empty: "",
   russian: "простой",
+  special: "log()",
 };
 
 export const highlighterResults = {
+  withSpecialSymbols: [
+    "console.",
+    <mark style={{ backgroundColor: "yellow", color: "black" }} key={1}>
+      log()
+    </mark>,
+    "",
+  ],
   singleHighlight: [
     "This is a ",
     <mark style={{ backgroundColor: "yellow", color: "black" }} key={1}>

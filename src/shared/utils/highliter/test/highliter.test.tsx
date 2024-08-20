@@ -7,6 +7,15 @@ describe("Highliter", () => {
     expect(result).toEqual(highlighterResults.singleHighlight);
   });
 
+  test("should work with regex symbols", () => {
+    const result = highliter(
+      textExamples.withSpecialSymbols,
+      targets.special,
+      colors
+    );
+    expect(result).toEqual(highlighterResults.withSpecialSymbols);
+  });
+
   test("should be case insensitive when highlighting the target", () => {
     const result = highliter(
       textExamples.caseInsensitiveText,

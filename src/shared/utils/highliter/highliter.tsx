@@ -1,12 +1,18 @@
 import { HighliterColors } from "./types";
 
+const escapeRegExp = (string: string): string => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+};
+
 export const highliter = (
   text: string,
   target: string,
   colors: HighliterColors
 ) => {
   if (!target) return [text];
-  const parts = text.split(new RegExp(`(${target})`, "gi"));
+  const escapedTarget = escapeRegExp(target);
+
+  const parts = text.split(new RegExp(`(${escapedTarget})`, "gi"));
 
   return parts.map((part, index) =>
     part.toLowerCase() === target.toLowerCase() ? (
