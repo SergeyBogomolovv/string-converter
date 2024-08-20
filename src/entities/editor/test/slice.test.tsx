@@ -15,13 +15,13 @@ describe("editorSlice", () => {
   });
 
   it("should toggle editMode", () => {
-    const action = setEditMode(true);
+    const action = { type: setEditMode.type, payload: true };
     const state = editorSlice.reducer(initialState, action);
     expect(state.editMode).toEqual(true);
   });
 
   it("should change value", () => {
-    const action = setValue("новое значение");
+    const action = { type: setValue.type, payload: "новое значение" };
     const state = editorSlice.reducer(initialState, action);
     expect(state.value).toEqual("новое значение");
   });
@@ -35,13 +35,13 @@ describe("editorSlice", () => {
       "другая часть текста",
     ];
 
-    const action = setHighlighted(highlighted);
+    const action = { type: setHighlighted.type, payload: highlighted };
     const state = editorSlice.reducer(initialState, action);
     expect(state.highlighted).toEqual(highlighted);
   });
 
   it("should change searchTarget", () => {
-    const action = setSearchTarget("поисковая фраза");
+    const action = { type: setSearchTarget.type, payload: "поисковая фраза" };
     const state = editorSlice.reducer(initialState, action);
     expect(state.searchTarget).toEqual("поисковая фраза");
   });
