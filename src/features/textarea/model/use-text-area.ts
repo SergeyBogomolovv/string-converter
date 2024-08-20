@@ -33,12 +33,14 @@ export const useTextArea = (
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
         const value = textarea.value;
-
-        textarea.value =
+        const newValue =
           value.substring(0, start) + "\t" + value.substring(end);
+
+        textarea.value = newValue;
 
         requestAnimationFrame(() => {
           textarea.selectionStart = textarea.selectionEnd = start + 1;
+          dispatch(setValue(textarea.value));
           adjustTextareaHeight();
         });
       } else if (
@@ -55,20 +57,24 @@ export const useTextArea = (
           const startLine = value.lastIndexOf("\n", start - 1) + 1;
           const endLine = value.indexOf("\n", start);
           const previousLineEnd = startLine - 1;
-
-          textarea.value =
+          const newValue =
             value.substring(0, startLine) +
             value.substring(endLine === -1 ? value.length : endLine + 1);
 
+          textarea.value = newValue;
+
           requestAnimationFrame(() => {
             textarea.selectionStart = textarea.selectionEnd = previousLineEnd;
+            dispatch(setValue(textarea.value));
             adjustTextareaHeight();
           });
         } else {
-          textarea.value = value.substring(0, start) + value.substring(end);
+          const newValue = value.substring(0, start) + value.substring(end);
+          textarea.value = newValue;
 
           requestAnimationFrame(() => {
             textarea.selectionStart = textarea.selectionEnd = start;
+            dispatch(setValue(textarea.value));
             adjustTextareaHeight();
           });
         }

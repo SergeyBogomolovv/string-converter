@@ -5,11 +5,17 @@ import {
   WordUsageStats,
 } from "./types";
 
-export function textCounter({
-  wordsCount = true,
-  mostUsedWords = false,
-  charsCount = true,
-}: Partial<TextCounterOptions>): TextCounterFn {
+export function textCounter(
+  {
+    wordsCount = true,
+    mostUsedWords = false,
+    charsCount = true,
+  }: Partial<TextCounterOptions> = {
+    wordsCount: true,
+    mostUsedWords: true,
+    charsCount: true,
+  }
+): TextCounterFn {
   return (text: string) => {
     if (charsCount || mostUsedWords || wordsCount) {
       text = text
