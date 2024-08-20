@@ -9,7 +9,7 @@ export interface EditorState {
   editMode: boolean;
 }
 
-const initialState: EditorState = {
+export const initialState: EditorState = {
   value: "",
   highlighted: [],
   searchTarget: "",
