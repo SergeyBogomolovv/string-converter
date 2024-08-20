@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { setStats } from "../model/slice";
 import { useEffect } from "react";
 import { textCounter } from "@/shared/utils/textcounter";
-import { showWordsCountSelector } from "../model/selectors";
+import { selectShowWordsCount } from "../model/selectors";
 
 export const Stats = () => {
-  const showWordsCount = useAppSelector(showWordsCountSelector);
+  const showWordsCount = useAppSelector(selectShowWordsCount);
 
   const count = textCounter({
     mostUsedWords: showWordsCount,

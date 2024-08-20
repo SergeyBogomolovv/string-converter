@@ -1,11 +1,11 @@
-import { getEditorValueSelector, setValue } from "@/entities/editor";
+import { selectEditorValue, setValue } from "@/entities/editor";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useCallback, useEffect, useRef } from "react";
 
 export const useTextArea = (
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
 ) => {
-  const value = useAppSelector(getEditorValueSelector);
+  const value = useAppSelector(selectEditorValue);
   const dispatch = useAppDispatch();
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);

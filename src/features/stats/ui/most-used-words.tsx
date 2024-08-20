@@ -1,10 +1,10 @@
 import { StatCard } from "@/entities/stat-card";
 import { useAppSelector } from "@/shared/store/hooks";
 import { Stack } from "@mui/material";
-import { mostUsedWordsSelector } from "../model/selectors";
+import { selectMostUsedWords } from "../model/selectors";
 
 export const MostUsedWords = () => {
-  const mostUsedWords = useAppSelector(mostUsedWordsSelector);
+  const mostUsedWords = useAppSelector(selectMostUsedWords);
 
   return (
     <Stack direction={"row"} sx={{ flexWrap: "wrap", gap: "1rem" }}>

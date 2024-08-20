@@ -1,9 +1,9 @@
-import { getEditorHighlitedSelector } from "@/entities/editor";
+import { selectHighlited } from "@/entities/editor";
 import { useAppSelector } from "@/shared/store/hooks";
 import { Paper } from "@mui/material";
 
 export const Textcontent = () => {
-  const highlighted = useAppSelector(getEditorHighlitedSelector);
+  const highlighted = useAppSelector(selectHighlited);
 
   return (
     <Paper

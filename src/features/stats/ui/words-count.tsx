@@ -4,10 +4,10 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { decreaseShowWordsCount, increaseShowWordsCount } from "../model/slice";
 import { Count } from "./count";
-import { showWordsCountSelector } from "../model/selectors";
+import { selectShowWordsCount } from "../model/selectors";
 
 export const WordsCount = () => {
-  const showWordsCount = useAppSelector(showWordsCountSelector);
+  const showWordsCount = useAppSelector(selectShowWordsCount);
   const dispatch = useAppDispatch();
 
   return (

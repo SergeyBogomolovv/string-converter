@@ -1,12 +1,10 @@
 import { RootState } from "@/shared/store";
 
-export const getEditorValueSelector = (state: RootState) => state.editor.value;
+export const selectEditorValue = (state: RootState) => state.editor.value;
 
-export const getEditorEditModeSelector = (state: RootState) =>
-  state.editor.editMode;
+export const selectEditMode = (state: RootState) => state.editor.editMode;
 
-export const getEditorSearchTargetSelector = (state: RootState) =>
+export const selectSearchTarget = (state: RootState) =>
   state.editor.searchTarget;
 
-export const getEditorHighlitedSelector = (state: RootState) =>
-  state.editor.highlighted;
+export const selectHighlited = (state: RootState) => state.editor.highlighted;

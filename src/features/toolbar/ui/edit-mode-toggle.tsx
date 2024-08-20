@@ -2,10 +2,10 @@ import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
-import { getEditorEditModeSelector, setEditMode } from "@/entities/editor";
+import { selectEditMode, setEditMode } from "@/entities/editor";
 
 export const EditModeToggle = () => {
-  const editMode = useAppSelector(getEditorEditModeSelector);
+  const editMode = useAppSelector(selectEditMode);
   const dispatch = useAppDispatch();
   function clickhandler() {
     if (editMode) {

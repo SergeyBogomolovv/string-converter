@@ -7,10 +7,10 @@ export {
 } from "./model/slice";
 
 export {
-  getEditorEditModeSelector,
-  getEditorHighlitedSelector,
-  getEditorSearchTargetSelector,
-  getEditorValueSelector,
+  selectEditMode,
+  selectEditorValue,
+  selectHighlited,
+  selectSearchTarget,
 } from "./model/selectors";
 
 export type { EditorState } from "./model/slice";
