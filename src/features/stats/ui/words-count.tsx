@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { decreaseShowWordsCount, increaseShowWordsCount } from "../model/slice";
-import { Count } from "./count";
+import { TextCount } from "./text-count";
 import { selectShowWordsCount } from "../model/selectors";
 
 export const WordsCount = () => {
@@ -35,15 +35,23 @@ export const WordsCount = () => {
           <Typography variant="h2">Часто встречающиеся слова</Typography>
         </Tooltip>
 
-        <IconButton onClick={() => dispatch(decreaseShowWordsCount())}>
+        <IconButton
+          data-testid="showwordscountdecreaseel"
+          onClick={() => dispatch(decreaseShowWordsCount())}
+        >
           <RemoveIcon />
         </IconButton>
-        <Typography variant="h2">{showWordsCount}</Typography>
-        <IconButton onClick={() => dispatch(increaseShowWordsCount())}>
+        <Typography data-testid="showwordscountel" variant="h2">
+          {showWordsCount}
+        </Typography>
+        <IconButton
+          data-testid="showwordscountincreaseel"
+          onClick={() => dispatch(increaseShowWordsCount())}
+        >
           <AddIcon />
         </IconButton>
       </Stack>
-      <Count />
+      <TextCount />
     </Paper>
   );
 };

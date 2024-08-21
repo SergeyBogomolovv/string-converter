@@ -7,7 +7,7 @@ export const MostUsedWords = () => {
   const mostUsedWords = useAppSelector(selectMostUsedWords);
 
   return (
-    <Stack spacing={2}>
+    <Stack data-testid="mostusedwordscontainerel" spacing={2}>
       {mostUsedWords.map((stats) => (
         <StatCard
           key={stats.word}

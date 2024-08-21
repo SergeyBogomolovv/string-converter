@@ -20,6 +20,7 @@ export const Stats = () => {
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectEditorValue);
 
+  //TODO: debounce
   useEffect(() => {
     dispatch(setStats(count(value)));
   }, [value, count]);
