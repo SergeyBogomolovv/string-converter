@@ -1,12 +1,10 @@
 import {
   editorSlice,
   setValue,
-  setHighlighted,
   setSearchTarget,
   setEditMode,
   initialState,
 } from "../model/slice";
-import { Highlited } from "@/shared/utils/highliter";
 
 describe("editorSlice", () => {
   it("should return default state", () => {
@@ -24,20 +22,6 @@ describe("editorSlice", () => {
     const action = { type: setValue.type, payload: "новое значение" };
     const state = editorSlice.reducer(initialState, action);
     expect(state.value).toEqual("новое значение");
-  });
-
-  it("should change highlighted", () => {
-    const highlighted: Highlited = [
-      "часть текста",
-      <mark key={1} style={{ backgroundColor: "yellow", color: "black" }}>
-        цель
-      </mark>,
-      "другая часть текста",
-    ];
-
-    const action = { type: setHighlighted.type, payload: highlighted };
-    const state = editorSlice.reducer(initialState, action);
-    expect(state.highlighted).toEqual(highlighted);
   });
 
   it("should change searchTarget", () => {

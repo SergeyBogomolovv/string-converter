@@ -8,6 +8,3 @@ export const selectEditMode = (state: { editor: EditorState }) =>
 
 export const selectSearchTarget = (state: { editor: EditorState }) =>
   state.editor.searchTarget;
-
-export const selectHighlited = (state: { editor: EditorState }) =>
-  state.editor.highlighted;

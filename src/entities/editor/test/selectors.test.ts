@@ -1,7 +1,6 @@
 import {
   selectEditMode,
   selectEditorValue,
-  selectHighlited,
   selectSearchTarget,
 } from "../model/selectors";
 import { EditorState } from "../model/slice";
@@ -11,7 +10,6 @@ describe("Editor Selectors", () => {
     editor: {
       editMode: true,
       value: "rewark",
-      highlighted: [""],
       searchTarget: "target",
     },
   };
@@ -22,10 +20,6 @@ describe("Editor Selectors", () => {
 
   it("should select editMode", () => {
     expect(selectEditMode(state)).toEqual(state.editor.editMode);
-  });
-
-  it("should select highlited", () => {
-    expect(selectHighlited(state)).toEqual(state.editor.highlighted);
   });
 
   it("should select searchTarget", () => {

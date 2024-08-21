@@ -19,7 +19,6 @@ describe("Search input", () => {
       editor: {
         searchTarget: "",
         value: "some test value",
-        highlighted: ["some test value"],
         editMode: false,
       },
     };
@@ -33,12 +32,5 @@ describe("Search input", () => {
     fireEvent.change(input, { target: { value: "test" } });
 
     expect(store.getState().editor.searchTarget).toEqual("test");
-    expect(store.getState().editor.highlighted).toEqual([
-      "some ",
-      <mark key={1} style={{ backgroundColor: "yellow", color: "black" }}>
-        test
-      </mark>,
-      " value",
-    ]);
   });
 });

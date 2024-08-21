@@ -1,29 +1,27 @@
-import { render } from "@testing-library/react";
+import { EditorState } from "@/entities/editor";
 import { Textcontent } from "../ui/textcontent";
-import * as reduxHooks from "@/shared/store/hooks";
+import { renderWithRedux } from "@/shared/store";
 
 describe("TextContent component", () => {
   it("should render correctly", () => {
-    jest.spyOn(reduxHooks, "useAppSelector").mockReturnValue([]);
-
-    const { getByTestId } = render(<Textcontent />);
+    const { getByTestId } = renderWithRedux(<Textcontent />);
     const textcontent = getByTestId("textcontendel");
-
     expect(textcontent).toBeInTheDocument();
   });
 
-  it("should receive correct value", () => {
-    const mockValue = [
-      "mock",
-      <mark style={{ backgroundColor: "yellow", color: "black" }} key={1}>
-        return
-      </mark>,
-      "value",
-    ];
+  it("should highlight correctly", () => {
+    const preloadedState: { editor: EditorState } = {
+      editor: {
+        searchTarget: "return",
+        value: "mockreturnvalue",
+        editMode: false,
+      },
+    };
 
-    jest.spyOn(reduxHooks, "useAppSelector").mockReturnValue(mockValue);
+    const { getByTestId } = renderWithRedux(<Textcontent />, {
+      preloadedState,
+    });
 
-    const { getByTestId } = render(<Textcontent />);
     const textcontent = getByTestId("textcontendel");
 
     expect(textcontent).toContainHTML(
