@@ -7,8 +7,8 @@ export const MostUsedWords = () => {
   const mostUsedWords = useAppSelector(selectMostUsedWords);
 
   return (
-    <Stack direction={"row"} sx={{ flexWrap: "wrap", gap: "1rem" }}>
-      {mostUsedWords?.map((stats) => (
+    <Stack spacing={2}>
+      {mostUsedWords.map((stats) => (
         <StatCard
           key={stats.word}
           count={stats.count}

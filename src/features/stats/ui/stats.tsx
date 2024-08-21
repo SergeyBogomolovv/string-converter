@@ -6,6 +6,7 @@ import { setStats } from "../model/slice";
 import { useEffect } from "react";
 import { textCounter } from "@/shared/utils/textcounter";
 import { selectShowWordsCount } from "../model/selectors";
+import { selectEditorValue } from "@/entities/editor";
 
 export const Stats = () => {
   const showWordsCount = useAppSelector(selectShowWordsCount);
@@ -17,7 +18,7 @@ export const Stats = () => {
   });
 
   const dispatch = useAppDispatch();
-  const value = useAppSelector((state) => state.editor.value);
+  const value = useAppSelector(selectEditorValue);
 
   useEffect(() => {
     dispatch(setStats(count(value)));

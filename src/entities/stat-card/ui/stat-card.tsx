@@ -3,7 +3,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 
 export const StatCard = ({ count, word, variations }: WordUsageStats) => {
   return (
-    <Card>
+    <Card sx={{ width: "100%" }}>
       <CardContent sx={{ padding: "1rem 2rem" }}>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Кол-во повторений: {count}

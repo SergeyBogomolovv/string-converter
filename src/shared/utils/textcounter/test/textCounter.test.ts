@@ -67,7 +67,7 @@ describe("TextCounter", () => {
       wordsCount: false,
       mostUsedWords: 0,
     });
-    expect(count(textWithReccurings.text).mostUsedWords).not.toBeDefined();
+    expect(count(textWithReccurings.text).mostUsedWords).toEqual([]);
   });
 
   test("check with disabled params", () => {

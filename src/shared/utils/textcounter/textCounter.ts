@@ -34,7 +34,7 @@ export function textCounter(
       result.wordsCount = words.length;
     }
 
-    if (mostUsedWords) {
+    if (typeof mostUsedWords === "number" || mostUsedWords) {
       const wordsUsage = words.reduce((wordsUsage, word) => {
         const key = word.toLowerCase();
 
@@ -59,7 +59,7 @@ export function textCounter(
 
       stats.sort((statA, statB) => statB.count - statA.count);
 
-      if (typeof mostUsedWords === "number" && mostUsedWords > 0) {
+      if (typeof mostUsedWords === "number") {
         result.mostUsedWords = stats.slice(0, mostUsedWords);
       } else {
         result.mostUsedWords = stats;
