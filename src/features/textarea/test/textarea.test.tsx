@@ -2,6 +2,8 @@ import { fireEvent } from "@testing-library/react";
 import { Textarea } from "../ui/textarea";
 import { renderWithRedux } from "@/shared/store";
 
+//Переделать, чтобы это был именно юнит тест
+
 describe("Textarea Component", () => {
   it("renders correctly", () => {
     const { getByTestId } = renderWithRedux(<Textarea />);
