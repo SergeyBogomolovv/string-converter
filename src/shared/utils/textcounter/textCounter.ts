@@ -3,6 +3,7 @@ import {
   TextCounterOptions,
   TextCounterResult,
   WordUsageStats,
+  Stats,
 } from "./types";
 
 export function textCounter(
@@ -49,12 +50,13 @@ export function textCounter(
         wordsUsage.set(key, newValue);
 
         return wordsUsage;
-      }, new Map<string, WordUsageStats>());
+      }, new Map<string, Stats>());
 
       const stats: WordUsageStats[] = [];
 
       for (const stat of wordsUsage.values()) {
-        if (stat.count > 1) stats.push(stat);
+        if (stat.count > 1)
+          stats.push({ ...stat, variations: [...stat.variations] });
       }
 
       stats.sort((statA, statB) => statB.count - statA.count);

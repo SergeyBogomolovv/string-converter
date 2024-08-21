@@ -13,7 +13,7 @@ describe("Stats selectors", () => {
       stats: {
         wordsCount: 12,
         charsCount: 13,
-        mostUsedWords: [{ word: "weqwe", count: 12, variations: new Set() }],
+        mostUsedWords: [{ word: "weqwe", count: 12, variations: [] }],
       },
     },
   };

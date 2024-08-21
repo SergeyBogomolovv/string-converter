@@ -5,6 +5,12 @@ export type TextCounterOptions = {
 };
 
 export type WordUsageStats = {
+  variations: string[];
+  word: string;
+  count: number;
+};
+
+export type Stats = {
   variations: Set<string>;
   word: string;
   count: number;

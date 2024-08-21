@@ -8,13 +8,13 @@ describe("Stats component", () => {
   const expectedMostUsedWordsCount = [
     {
       word: "Third",
-      variations: new Set(["third", "Third"]),
+      variations: ["third", "Third"],
       count: 4,
     },
-    { word: "Test", variations: new Set(["test", "TEST"]), count: 3 },
+    { word: "Test", variations: ["test", "TEST"], count: 3 },
     {
       word: "Seconde",
-      variations: new Set(["seconde", "sEconde"]),
+      variations: ["seconde", "sEconde"],
       count: 2,
     },
   ];

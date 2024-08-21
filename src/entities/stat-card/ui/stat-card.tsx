@@ -12,7 +12,7 @@ export const StatCard = ({ count, word, variations }: WordUsageStats) => {
           {word}
         </Typography>
         <Typography sx={{ mt: 1.5 }} color="text.secondary">
-          Вариации: {[...variations].join(", ")}
+          Вариации: {variations.join(", ")}
         </Typography>
       </CardContent>
     </Card>
