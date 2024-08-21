@@ -1,19 +1,29 @@
-import { wait } from "@/shared/helpers/wait";
 import { textWriter } from "../textwriter";
 import { duration1000, testValue } from "./mocks";
 
-let text = "";
-
-beforeEach(() => {
-  text = "";
-});
 describe("TextWriter", () => {
+  let text = "";
+
+  beforeEach(async () => {
+    await jest.advanceTimersByTimeAsync(100);
+    text = "";
+  });
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
   test("should output characters in a given time", async () => {
     textWriter(duration1000, testValue, (char) => {
       text += char;
     });
     expect(text).not.toBe(testValue);
-    await wait(duration1000);
+    await jest.advanceTimersByTimeAsync(duration1000);
+
     expect(text).toBe(testValue);
   });
 
@@ -23,8 +33,8 @@ describe("TextWriter", () => {
     textWriter(duration1000, testValue, (char) => {
       text += char;
     });
-    for (let i = 0; i < testValue.length; i++) {
-      await wait(time);
+    for (let i = 1; i < testValue.length; i++) {
+      await jest.advanceTimersByTimeAsync(time);
       expect(text).toBe(testValue.slice(0, i));
     }
   });
