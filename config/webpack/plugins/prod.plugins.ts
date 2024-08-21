@@ -3,6 +3,7 @@ import type { Paths } from "../types/types";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import basePlugins from "./base.plugins";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import CompressionPlugin from "compression-webpack-plugin";
 
 export default function prodPlugins(
   paths: Paths,
@@ -11,6 +12,7 @@ export default function prodPlugins(
   return [
     ...basePlugins(paths),
     new MiniCssExtractPlugin(),
+    new CompressionPlugin(),
     analyze && new BundleAnalyzerPlugin(),
   ].filter(Boolean);
 }
