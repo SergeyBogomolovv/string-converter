@@ -26,7 +26,7 @@ export const SearchInput = () => {
         onChange={handleChange}
         sx={{ width: "100%" }}
         placeholder="Поиск"
-        inputProps={{ "aria-label": "search" }}
+        inputProps={{ "aria-label": "search", "data-testid": "search-inputel" }}
       />
     </Paper>
   );

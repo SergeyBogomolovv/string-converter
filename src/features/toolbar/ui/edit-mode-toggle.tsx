@@ -17,6 +17,7 @@ export const EditModeToggle = () => {
 
   return (
     <Button
+      data-testid="editmodetoggleel"
       startIcon={editMode ? <SaveIcon /> : <EditIcon />}
       variant="contained"
       onClick={clickhandler}
