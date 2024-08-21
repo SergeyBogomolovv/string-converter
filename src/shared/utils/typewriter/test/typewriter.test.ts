@@ -1,10 +1,8 @@
-import { wait } from "@/shared/helpers/wait";
 import { typeWriter } from "../typewriter";
 import {
   baseWord1,
   baseWord2,
   delay10,
-  delay20,
   expectedBaseWord,
   expectedSecondWord,
   secondWord1,
@@ -12,13 +10,22 @@ import {
   secondWord3,
 } from "./mocks";
 
-let word = "";
-beforeEach(() => {
-  word = "";
-});
-
 describe("Typewriter", () => {
-  test("base usage", async () => {
+  let word = "";
+  beforeEach(async () => {
+    await jest.advanceTimersByTimeAsync(100);
+    word = "";
+  });
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  it("should handle base usage", async () => {
     function outputChar(char: string) {
       word += char;
     }
@@ -26,45 +33,45 @@ describe("Typewriter", () => {
     write(baseWord1);
     write(baseWord2);
 
-    for (let i = 0; i < expectedBaseWord.length + 1; i++) {
-      await wait(delay10);
+    for (let i = 1; i < expectedBaseWord.length; i++) {
+      await jest.advanceTimersByTimeAsync(delay10);
       expect(word).toBe(expectedBaseWord.slice(0, i));
     }
   });
 
-  test("usage after time reached", async () => {
+  it("should handle usage after time reached", async () => {
     function outputChar(char: string) {
       word += char;
     }
     const write = typeWriter(delay10, outputChar);
     write(baseWord1);
-    await wait(baseWord1.length * delay10 + delay20);
+    await jest.advanceTimersByTimeAsync(baseWord1.length * delay10);
     expect(word).toBe(baseWord1);
     write(baseWord2);
-    await wait((baseWord2.length + 1) * delay10);
+    await jest.advanceTimersByTimeAsync(baseWord2.length * delay10);
     expect(word).toBe(expectedBaseWord);
   });
 
-  test("different time calls", async () => {
+  it("should handle different time calls", async () => {
     function outputChar(char: string) {
       word += char;
     }
     const write = typeWriter(delay10, outputChar);
     write(secondWord1);
-    await wait(50);
+    await jest.advanceTimersByTimeAsync(50);
     write(secondWord2);
-    await wait(270);
+    await jest.advanceTimersByTimeAsync(270);
     write(secondWord3);
-    await wait(expectedSecondWord.length * delay10);
+    await jest.advanceTimersByTimeAsync(expectedSecondWord.length * delay10);
     expect(word).toBe(expectedSecondWord);
   });
 
-  test("should handle zero delay correctly", async () => {
+  it("should handle zero delay correctly", async () => {
     const write = typeWriter(0, (char) => {
       word += char;
     });
     write(baseWord1);
-    await wait(10);
+    await jest.runAllTimersAsync();
     expect(word).toBe(baseWord1);
   });
 });

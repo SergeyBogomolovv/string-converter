@@ -21,22 +21,13 @@
 - Сохранение результатов в браузере
 - Сортировка введеных слов
 
-### Что еще планирую, но не уверен, буду ли делать на этом проекте
-
-- Аккаунты пользователей
-- Сохранение работ в обьектном хранилище
-
 ### Что использую на проекте
 
 - Сборка: webpack
 - Front-end фремворк: React
+- State-manage: Redux Toolkit
+- UI библиотека: MUI
 - Линтеры: eslint, stylelint
-- Тесты: jest, rtl, playwright (или cypress, пока не решил)
+- Тесты: jest, rtl
 - CI: gh actions
 - CD: vercel
-
-### Если буду делать backend часть
-
-- Фреймворк: Nest.js
-- СУБД, ORM: Postgresql, Typeorm
-- Хранилище: yc object storage

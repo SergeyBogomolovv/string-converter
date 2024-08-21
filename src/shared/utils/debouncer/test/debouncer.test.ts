@@ -1,21 +1,31 @@
 import { debouncer } from "../debouncer";
-let expectedWord = "";
-
-beforeEach(() => {
-  expectedWord = "";
-});
 
 describe("Debouncer", () => {
+  let expectedWord = "";
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  beforeEach(async () => {
+    await jest.advanceTimersByTimeAsync(100);
+    expectedWord = "";
+  });
+
   test("should debounce function", async () => {
     function testFn(txt: string) {
       expectedWord = txt;
     }
     const debouncedTest = debouncer(testFn, 100);
     debouncedTest("test1");
-    await new Promise((res) => setTimeout(res, 10));
+    await jest.advanceTimersByTimeAsync(10);
     debouncedTest("test2");
     debouncedTest("test3");
-    await new Promise((res) => setTimeout(res, 100));
+    await jest.advanceTimersByTimeAsync(100);
     expect(expectedWord).toEqual("test3");
   });
 
@@ -25,7 +35,7 @@ describe("Debouncer", () => {
     }
     const debouncedTest = debouncer(testFn, 100);
     debouncedTest("test");
-    await new Promise((res) => setTimeout(res, 90));
+    await jest.advanceTimersByTimeAsync(90);
     expect(expectedWord).toEqual("");
   });
 });
