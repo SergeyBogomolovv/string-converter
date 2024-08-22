@@ -1,86 +1,59 @@
 import { replacer } from "../replacer";
-import {
-  differentLanguages,
-  differentRegisters,
-  doubleUsage,
-  lastWord,
-  replacementWithSpace,
-  simpleText,
-  textWithReccurents,
-} from "./mocks";
 
-describe("Replacer", () => {
-  test("simple", () => {
-    const replace = replacer({ wordsToReplace: simpleText.wordsToReplace });
-    expect(replace(simpleText.text)).toEqual(simpleText.expected);
+describe("replacer function", () => {
+  it("should replace a single word in the text", () => {
+    const result = replacer(["hello"], "hello world", "hi");
+    expect(result).toBe("hi world");
   });
 
-  test("with reccurents", () => {
-    const replace = replacer({
-      wordsToReplace: textWithReccurents.wordsToReplace,
-      replacement: textWithReccurents.replacement,
-    });
-    expect(replace(textWithReccurents.text)).toEqual(
-      textWithReccurents.expected
+  it("should replace multiple words in the text", () => {
+    const result = replacer(["hello", "world"], "hello world, hello!", "hi");
+    expect(result).toBe("hi hi, hi!");
+  });
+
+  it("should handle words with different cases", () => {
+    const result = replacer(["Hello"], "Hello world, hello!", "hi");
+    expect(result).toBe("hi world, hi!");
+  });
+
+  it("should preserve spaces, tabs, and newlines in the text", () => {
+    const text = `\thello\tworld\nhello   world!`;
+    const expected = `\thi\tworld\nhi   world!`;
+    const result = replacer(["hello"], text, "hi");
+    expect(result).toBe(expected);
+  });
+
+  it("should correctly replace words in a text with mixed languages", () => {
+    const result = replacer(
+      ["hello", "мир"],
+      "hello мир, hello world!",
+      "привет"
     );
+    expect(result).toBe("привет привет, привет world!");
   });
 
-  test("different registers", () => {
-    const replace = replacer({
-      wordsToReplace: differentRegisters.wordsToReplace,
-      replacement: differentRegisters.replacement,
-    });
-    expect(replace(differentRegisters.text)).toEqual(
-      differentRegisters.expected
-    );
+  it("should not replace substrings within words", () => {
+    const result = replacer(["cat"], "concatenate category", "dog");
+    expect(result).toBe("concatenate category");
   });
 
-  test("last word", () => {
-    const replace = replacer({ wordsToReplace: lastWord.wordsToReplace });
-    expect(replace(lastWord.text)).toEqual(lastWord.expected);
+  it("should handle empty replacement string correctly", () => {
+    const result = replacer(["hello"], "hello world, hello!", "");
+    expect(result).toBe(" world, !");
   });
 
-  test("replacement with space", () => {
-    const replace = replacer({
-      wordsToReplace: replacementWithSpace.wordsToReplace,
-      replacement: replacementWithSpace.replacement,
-    });
-    expect(replace(replacementWithSpace.text)).toEqual(
-      replacementWithSpace.expected
-    );
+  it("should return the same text if no words are matched", () => {
+    const result = replacer(["bye"], "hello world", "hi");
+    expect(result).toBe("hello world");
   });
 
-  test("different languages", () => {
-    const replace = replacer({
-      wordsToReplace: differentLanguages.wordsToReplace,
-      replacement: differentLanguages.replacement,
-    });
-    expect(replace(differentLanguages.text)).toEqual(
-      differentLanguages.expected
-    );
+  it("should work with special characters in the text", () => {
+    const result = replacer(["hello"], "hello-world, hello.world", "hi");
+    expect(result).toBe("hi-world, hi.world");
   });
 
-  test("double usage", () => {
-    let text = "";
-
-    function updateFn(txt: string) {
-      text = txt;
-    }
-
-    const replace1 = replacer({
-      wordsToReplace: doubleUsage.wordsToReplace[0],
-      replacement: doubleUsage.replacements[0],
-      updateFn,
-    });
-    const replace2 = replacer({
-      wordsToReplace: doubleUsage.wordsToReplace[1],
-      replacement: doubleUsage.replacements[1],
-      updateFn,
-    });
-
-    replace1(doubleUsage.text);
-    replace2(text);
-
-    expect(text).toEqual(doubleUsage.expected);
+  it("should handle words with accents and diacritics", () => {
+    const result = replacer(["café", "naïve"], "café and naïve", "restaurant");
+    expect(result).toBe("restaurant and restaurant");
   });
 });
