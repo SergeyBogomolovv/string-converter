@@ -1,6 +1,6 @@
 import { renderWithRedux } from "@/shared/store";
 import { SearchInput } from "../ui/search-input";
-import { EditorState } from "@/entities/editor";
+import { EditorState, Mode } from "@/entities/editor";
 import { fireEvent } from "@testing-library/react";
 
 describe("Search input", () => {
@@ -20,6 +20,7 @@ describe("Search input", () => {
         searchTarget: "",
         value: "some test value",
         editMode: false,
+        mode: Mode.sort,
       },
     };
 

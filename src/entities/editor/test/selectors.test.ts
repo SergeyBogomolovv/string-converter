@@ -1,9 +1,10 @@
 import {
   selectEditMode,
   selectEditorValue,
+  selectMode,
   selectSearchTarget,
 } from "../model/selectors";
-import { EditorState } from "../model/slice";
+import { EditorState, Mode } from "../model/slice";
 
 describe("Editor Selectors", () => {
   const state: { editor: EditorState } = {
@@ -11,6 +12,7 @@ describe("Editor Selectors", () => {
       editMode: true,
       value: "rewark",
       searchTarget: "target",
+      mode: Mode.generate,
     },
   };
 
@@ -24,5 +26,9 @@ describe("Editor Selectors", () => {
 
   it("should select searchTarget", () => {
     expect(selectSearchTarget(state)).toEqual(state.editor.searchTarget);
+  });
+
+  it("should select mode", () => {
+    expect(selectMode(state)).toEqual(state.editor.mode);
   });
 });

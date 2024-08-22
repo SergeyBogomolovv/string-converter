@@ -1,7 +1,7 @@
 import { renderWithRedux } from "@/shared/store";
 import { StatsState } from "../model/slice";
 import { Stats } from "../ui/stats";
-import { EditorState } from "@/entities/editor";
+import { EditorState, Mode } from "@/entities/editor";
 
 describe("Stats component", () => {
   let preloadedState: { stats: StatsState; editor: EditorState };
@@ -25,6 +25,7 @@ describe("Stats component", () => {
         value: "test test TEST seconde sEconde third third Third Third",
         editMode: false,
         searchTarget: "",
+        mode: Mode.generate,
       },
       stats: {
         showWordsCount: 3,
