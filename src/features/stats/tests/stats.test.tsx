@@ -1,6 +1,6 @@
 import { renderWithRedux } from "@/shared/store";
 import { StatsState } from "../model/slice";
-import { Stats } from "../ui/stats";
+import Stats from "../ui/stats";
 import { EditorState, Mode } from "@/entities/editor";
 
 describe("Stats component", () => {

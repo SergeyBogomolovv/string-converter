@@ -6,6 +6,7 @@ export enum Mode {
   replace = "replace",
   generate = "generate",
   sort = "sort",
+  none = "none",
 }
 
 export interface EditorState {
@@ -19,7 +20,7 @@ export const initialState: EditorState = {
   value: "",
   searchTarget: "",
   editMode: true,
-  mode: Mode.replace,
+  mode: Mode.none,
 };
 
 export const editorSlice = createSlice({
@@ -33,11 +34,13 @@ export const editorSlice = createSlice({
     setSearchTarget: (state, action: PayloadAction<string>) => {
       state.searchTarget = action.payload;
     },
+
     setEditMode: (state, action: PayloadAction<boolean>) => {
       state.editMode = action.payload;
     },
+
     setMode: (state, action: PayloadAction<Mode>) => {
-      state.mode = action.payload;
+      state.mode = action.payload ? action.payload : Mode.none;
     },
   },
 });

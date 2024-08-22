@@ -8,7 +8,7 @@ import { textCounter } from "@/shared/utils/textcounter";
 import { selectShowWordsCount } from "../model/selectors";
 import { selectEditorValue } from "@/entities/editor";
 
-export const Stats = () => {
+const Stats = () => {
   const showWordsCount = useAppSelector(selectShowWordsCount);
 
   const count = textCounter({
@@ -32,3 +32,5 @@ export const Stats = () => {
     </Stack>
   );
 };
+
+export default Stats;

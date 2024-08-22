@@ -4,7 +4,7 @@ import { useSearch } from "../model/use-search";
 import { useAppSelector } from "@/shared/store/hooks";
 import { selectEditMode } from "@/entities/editor";
 
-export const SearchInput = () => {
+export const Search = () => {
   const { handleChange, searchTarget } = useSearch();
   const editMode = useAppSelector(selectEditMode);
   return (

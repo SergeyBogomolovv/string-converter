@@ -1,9 +1,9 @@
 import { renderWithRedux } from "@/shared/store";
-import { Toolbar } from "../ui/toolbar";
+import { Toolbar } from "../../../widgets/toolbar/ui/toolbar";
 import { fireEvent } from "@testing-library/react";
 import { Mode } from "@/entities/editor";
 
-describe("Toolbar", () => {
+describe("Mode select component", () => {
   it("should change mode", () => {
     const { getByTestId, store } = renderWithRedux(<Toolbar />);
     const statsModeBtn = getByTestId("statsModeBtn");
