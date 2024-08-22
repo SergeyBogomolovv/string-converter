@@ -1,20 +1,11 @@
 import { selectEditorValue, selectSearchTarget } from "@/entities/editor";
 import { useAppSelector } from "@/shared/store/hooks";
-import { Highlited, highliter } from "@/shared/utils/highliter";
+import { highliter } from "@/shared/utils/highliter";
 import { Paper } from "@mui/material";
-import { useEffect, useState } from "react";
 
 export const Textcontent = () => {
   const searchTarget = useAppSelector(selectSearchTarget);
   const value = useAppSelector(selectEditorValue);
-
-  const [highlited, setHighlighted] = useState<Highlited>([]);
-
-  useEffect(() => {
-    setHighlighted(
-      highliter(value, searchTarget, { highlight: "yellow", text: "black" })
-    );
-  }, [value, searchTarget]);
 
   return (
     <Paper
@@ -30,7 +21,10 @@ export const Textcontent = () => {
         letterSpacing: "0.05rem",
       }}
     >
-      {...highlited}
+      {...highliter(value, searchTarget, {
+        highlight: "yellow",
+        text: "black",
+      })}
     </Paper>
   );
 };
