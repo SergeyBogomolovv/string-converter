@@ -10,6 +10,7 @@ export {
   selectEditMode,
   selectEditorValue,
   selectSearchTarget,
+  selectMode,
 } from "./model/selectors";
 
 export type { EditorState } from "./model/slice";

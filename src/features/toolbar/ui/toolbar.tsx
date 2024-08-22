@@ -7,28 +7,54 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { SearchInput } from "./search-input";
 import { EditModeToggle } from "./edit-mode-toggle";
 import ToggleButton from "./toggle-button";
-import { Mode } from "@/entities/editor";
+import { Mode, selectMode, setMode } from "@/entities/editor";
+import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 
 export const Toolbar = () => {
+  const mode = useAppSelector(selectMode);
+  const dispatch = useAppDispatch();
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>, mode: Mode) => {
+    dispatch(setMode(mode));
+  };
+
   return (
     <Stack spacing={1} direction="row">
       <EditModeToggle />
       <SearchInput />
       <ToggleButtonGroup
         sx={{ backgroundColor: "white" }}
+        value={mode}
         exclusive
+        onChange={handleClick}
         aria-label="modes"
       >
-        <ToggleButton value={Mode.stats} title="Статистика">
+        <ToggleButton
+          testid="statsModeBtn"
+          value={Mode.stats}
+          title="Статистика"
+        >
           <AssessmentIcon />
         </ToggleButton>
-        <ToggleButton value={Mode.replace} title="Замена слов">
+        <ToggleButton
+          testid="replaceModeBtn"
+          value={Mode.replace}
+          title="Замена слов"
+        >
           <EditNoteIcon />
         </ToggleButton>
-        <ToggleButton value={Mode.generate} title="Сгенерировать">
+        <ToggleButton
+          testid="generateModeBtn"
+          value={Mode.generate}
+          title="Сгенерировать"
+        >
           <AbcIcon />
         </ToggleButton>
-        <ToggleButton value={Mode.sort} title="Сортировка слов">
+        <ToggleButton
+          testid="sortModeBtn"
+          value={Mode.sort}
+          title="Сортировка слов"
+        >
           <FilterListIcon />
         </ToggleButton>
       </ToggleButtonGroup>

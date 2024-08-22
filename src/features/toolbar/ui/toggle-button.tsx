@@ -5,11 +5,12 @@ interface Props {
   title: string;
   value: string;
   children: React.ReactNode;
+  testid?: string;
 }
 
-const ToggleButton = ({ title, value, children }: Props) => {
+const ToggleButton = ({ title, value, children, testid }: Props) => {
   return (
-    <Tooltip placement="top" title={title}>
+    <Tooltip data-testid={testid} placement="top" title={title}>
       <Button value={value} aria-label={title}>
         {children}
       </Button>
