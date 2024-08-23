@@ -11,6 +11,7 @@ describe("Sort component", () => {
         editMode: true,
         mode: Mode.sort,
         searchTarget: "",
+        undoList: [],
         value: "Богомолов Грекас, Алеша Попович, Тугарин Змеевич, Some English",
       },
     };

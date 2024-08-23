@@ -13,6 +13,7 @@ describe("Editor Selectors", () => {
       value: "rewark",
       searchTarget: "target",
       mode: Mode.generate,
+      undoList: [],
     },
   };
 

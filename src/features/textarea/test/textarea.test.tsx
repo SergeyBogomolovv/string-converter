@@ -1,6 +1,8 @@
 import { fireEvent } from "@testing-library/react";
 import { Textarea } from "../ui/textarea";
 import { renderWithRedux } from "@/shared/store";
+import { EditorState, Mode } from "@/entities/editor";
+import { act } from "react";
 
 describe("Textarea Component", () => {
   it("renders correctly", () => {
@@ -73,5 +75,32 @@ describe("Textarea Component", () => {
 
     fireEvent.change(textarea, { target: { value: "Test" } });
     expect(handleChange).toHaveBeenCalled();
+  });
+
+  it("should undo correctly", async () => {
+    const preloadedState: { editor: EditorState } = {
+      editor: {
+        mode: Mode.none,
+        editMode: false,
+        searchTarget: "",
+        undoList: ["value before"],
+        value: "some value",
+      },
+    };
+    const { getByTestId, store } = renderWithRedux(<Textarea />, {
+      preloadedState,
+    });
+    const textarea = getByTestId("textareael") as HTMLTextAreaElement;
+
+    await act(async () =>
+      fireEvent.keyDown(textarea, {
+        key: "z",
+        code: "KeyZ",
+        ctrlKey: true,
+      })
+    );
+
+    expect(store.getState().editor.value).toBe("value before");
+    expect(store.getState().editor.undoList).toHaveLength(0);
   });
 });

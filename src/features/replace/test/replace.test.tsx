@@ -7,6 +7,7 @@ describe("Replace component", () => {
   it("should replace correctly", async () => {
     const preloadedState: { editor: EditorState } = {
       editor: {
+        undoList: [],
         mode: Mode.replace,
         value: "some test value",
         editMode: false,
@@ -34,6 +35,7 @@ describe("Replace component", () => {
   it("should replace empty string correctly", async () => {
     const preloadedState: { editor: EditorState } = {
       editor: {
+        undoList: [],
         mode: Mode.replace,
         value: "some test value test",
         editMode: false,
