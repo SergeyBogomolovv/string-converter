@@ -15,6 +15,7 @@ export const EditModeToggle = () => {
   const dispatch = useAppDispatch();
   function clickhandler() {
     if (editMode) {
+      localStorage.setItem("saved", JSON.stringify(value));
       dispatch(setEditMode(false));
     } else {
       dispatch(setEditMode(true));

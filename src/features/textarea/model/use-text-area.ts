@@ -1,5 +1,6 @@
 import { selectEditorValue, setValue, undo } from "@/entities/editor";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
+import { debouncer } from "@/shared/utils/debouncer";
 import { useCallback, useEffect, useRef } from "react";
 
 export const useTextArea = (
@@ -17,6 +18,17 @@ export const useTextArea = (
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   }, []);
+
+  const debouncedSetStats = useCallback(
+    debouncer((value: string) => {
+      localStorage.setItem("saved", JSON.stringify(value));
+    }, 1000),
+    []
+  );
+
+  useEffect(() => {
+    debouncedSetStats(value);
+  }, [value]);
 
   useEffect(() => {
     adjustTextareaHeight();
