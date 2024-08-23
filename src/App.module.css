@@ -1,11 +1,26 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   height: auto;
   margin: auto;
   min-height: 100svh;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
   place-content: center;
-  width: 70%;
+  width: 95%;
+}
+
+@media (width > 768px) {
+  .container {
+    gap: 2.5rem;
+    width: 85%;
+  }
+}
+
+@media (width > 1024px) {
+  .container {
+    gap: 3rem;
+    padding: 2rem 0;
+    width: 70%;
+  }
 }

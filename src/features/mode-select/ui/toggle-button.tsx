@@ -12,7 +12,12 @@ interface Props {
 const ToggleButton = ({ title, value, children, testid, disabled }: Props) => {
   return (
     <Tooltip data-testid={testid} placement="top" title={title}>
-      <Button disabled={disabled} value={value} aria-label={title}>
+      <Button
+        sx={{ width: "100%" }}
+        disabled={disabled}
+        value={value}
+        aria-label={title}
+      >
         {children}
       </Button>
     </Tooltip>
