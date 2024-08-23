@@ -30,7 +30,7 @@ const Replace = () => {
         register={register}
         name="wordsToReplace"
         label="Слова"
-        helperText="Введите слова, разделяя их запятой и пробелом"
+        helperText="Введите слова, разделяя их запятой и пробелом."
         placeholder="Пример: дом, дерево, дорога"
       />
       <Input
@@ -38,7 +38,7 @@ const Replace = () => {
         name="replace"
         label="Заменить на"
         placeholder="Введите слово"
-        helperText="Оставьте пустым чтобы удалить слова"
+        helperText="Оставьте пустым, чтобы удалить слова."
       />
 
       <Button type="submit" data-testid="replaceBtn" variant="contained">
