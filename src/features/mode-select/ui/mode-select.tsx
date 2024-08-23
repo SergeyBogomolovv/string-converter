@@ -23,7 +23,7 @@ export const ModeSelect = () => {
   };
   return (
     <ToggleButtonGroup
-      sx={{ backgroundColor: "white" }}
+      sx={{ backgroundColor: "white", width: "100%" }}
       value={mode}
       exclusive
       onChange={handleClick}
