@@ -1,3 +1,4 @@
+import styles from "./search.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import { useSearch } from "../model/use-search";
@@ -7,17 +8,10 @@ import { selectEditMode } from "@/entities/editor";
 export const Search = () => {
   const { handleChange, searchTarget } = useSearch();
   const editMode = useAppSelector(selectEditMode);
+
   return (
-    <Paper
-      component="form"
-      sx={{
-        width: "27%",
-        p: "2px 4px",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <IconButton sx={{ p: "10px" }} aria-label="search">
+    <Paper component="form" className={styles.container}>
+      <IconButton disabled={editMode} sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>
       <InputBase

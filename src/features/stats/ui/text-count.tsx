@@ -1,5 +1,6 @@
+import styles from "./stats.module.css";
 import { useAppSelector } from "@/shared/store/hooks";
-import { Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { selectWordsCount, selectCharsCount } from "../model/selectors";
 
 export const TextCount = () => {
@@ -7,7 +8,7 @@ export const TextCount = () => {
   const wordsCount = useAppSelector(selectWordsCount);
 
   return (
-    <Stack>
+    <div className={styles.count}>
       <Typography
         data-testid="charscountel"
         variant="body2"
@@ -22,6 +23,6 @@ export const TextCount = () => {
       >
         Количество слов: {wordsCount}
       </Typography>
-    </Stack>
+    </div>
   );
 };
