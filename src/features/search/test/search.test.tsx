@@ -2,6 +2,7 @@ import { renderWithRedux } from "@/shared/store";
 import { Search } from "../ui/search";
 import { EditorState, Mode } from "@/entities/editor";
 import { fireEvent } from "@testing-library/react";
+import { act } from "react";
 
 describe("Search input", () => {
   it("should render correctly", () => {
@@ -14,7 +15,7 @@ describe("Search input", () => {
     expect(getByTestId("search-inputel")).toBeDisabled();
   });
 
-  it("should search correctly", () => {
+  it("should search correctly", async () => {
     const preloadedState: { editor: EditorState } = {
       editor: {
         searchTarget: "",
@@ -30,7 +31,9 @@ describe("Search input", () => {
 
     const input = getByTestId("search-inputel") as HTMLInputElement;
 
-    fireEvent.change(input, { target: { value: "test" } });
+    await act(async () =>
+      fireEvent.change(input, { target: { value: "test" } })
+    );
 
     expect(store.getState().editor.searchTarget).toEqual("test");
   });

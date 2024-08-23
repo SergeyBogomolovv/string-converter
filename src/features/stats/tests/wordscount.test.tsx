@@ -2,6 +2,7 @@ import { renderWithRedux } from "@/shared/store";
 import { StatsState } from "../model/slice";
 import { WordsCount } from "../ui/words-count";
 import { fireEvent } from "@testing-library/react";
+import { act } from "react";
 
 describe("Most used words Count", () => {
   let preloadedState: { stats: StatsState };
@@ -24,23 +25,27 @@ describe("Most used words Count", () => {
     );
   });
 
-  it("should correctly increase count", () => {
+  it("should correctly increase count", async () => {
     const { getByTestId, store } = renderWithRedux(<WordsCount />, {
       preloadedState,
     });
     const button = getByTestId("showwordscountincreaseel");
-    fireEvent.click(button);
+
+    await act(async () => fireEvent.click(button));
+
     expect(store.getState().stats.showWordsCount).toBe(
       preloadedState.stats.showWordsCount + 1
     );
   });
 
-  it("should correctly decrease count", () => {
+  it("should correctly decrease count", async () => {
     const { getByTestId, store } = renderWithRedux(<WordsCount />, {
       preloadedState,
     });
     const button = getByTestId("showwordscountdecreaseel");
-    fireEvent.click(button);
+
+    await act(async () => fireEvent.click(button));
+
     expect(store.getState().stats.showWordsCount).toBe(
       preloadedState.stats.showWordsCount - 1
     );
