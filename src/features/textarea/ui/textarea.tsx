@@ -1,4 +1,4 @@
-import type { TextareaHTMLAttributes } from "react";
+import { type TextareaHTMLAttributes } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 import { useTextArea } from "../model/use-text-area";
@@ -10,8 +10,6 @@ export const Textarea = (
   const { textareaRef, handleChange, handleKeyDown, value } = useTextArea(
     props.onChange
   );
-
-  //TODO: debounced save value
 
   return (
     <TextareaAutosize
