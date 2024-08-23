@@ -1,6 +1,11 @@
 .container {
   display: flex;
   flex-direction: column;
+  gap: 3rem;
+  height: auto;
+  margin: auto;
   min-height: 100svh;
+  padding: 3rem 0;
   place-content: center;
+  width: 70%;
 }

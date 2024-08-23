@@ -11,20 +11,15 @@ const theme = createTheme({
       primary: "#2e2e2e",
       secondary: "#555555",
     },
-    divider: "#e0e0e0",
     primary: {
-      main: "#fff",
+      main: "#2884FF",
     },
     secondary: {
-      main: "#828282",
+      main: "#A66FF0",
     },
   },
   typography: {
     fontFamily: "Inter, Arial, sans-serif",
-    h1: {
-      fontWeight: 600,
-      fontSize: "2rem",
-    },
     h2: {
       fontWeight: 600,
       fontSize: "1.5rem",
@@ -41,14 +36,13 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 16,
   },
   components: {
     MuiPaper: {
       styleOverrides: {
         root: {
           textTransform: "none",
-          borderRadius: 16,
         },
       },
     },
@@ -56,12 +50,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
-          borderRadius: 16,
-          fontWeight: 700,
-        },
-        contained: {
-          backgroundColor: "#fff",
-          color: "#000",
         },
       },
     },

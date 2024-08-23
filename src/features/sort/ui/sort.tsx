@@ -11,7 +11,7 @@ const Sort = () => {
   };
   return (
     <Paper sx={{ p: 2, display: "flex", flexDirection: "column", gap: "2rem" }}>
-      <Typography variant="body1">
+      <Typography variant="body2">
         По нажатию, все части текста, разделенные запятой, отсортируются в
         алфавитном порядке.
       </Typography>

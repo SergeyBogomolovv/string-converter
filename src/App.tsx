@@ -6,13 +6,13 @@ import { Mode } from "@/widgets/mode";
 
 const App = () => {
   return (
-    <main className={styles.container}>
-      <Stack spacing={3} width="70%" margin="auto">
-        <Toolbar />
-        <Content />
+    <Stack className={styles.container}>
+      <Toolbar />
+      <Content />
+      <div className={styles.content}>
         <Mode />
-      </Stack>
-    </main>
+      </div>
+    </Stack>
   );
 };
 

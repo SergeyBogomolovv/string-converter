@@ -5,10 +5,17 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import AbcIcon from "@mui/icons-material/Abc";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { Mode, selectMode, setMode } from "@/entities/editor";
+import {
+  Mode,
+  selectEditorValue,
+  selectMode,
+  setMode,
+} from "@/entities/editor";
 
 export const ModeSelect = () => {
   const mode = useAppSelector(selectMode);
+  const value = useAppSelector(selectEditorValue);
+
   const dispatch = useAppDispatch();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>, mode: Mode) => {
@@ -22,10 +29,16 @@ export const ModeSelect = () => {
       onChange={handleClick}
       aria-label="modes"
     >
-      <ToggleButton testid="statsModeBtn" value={Mode.stats} title="Статистика">
+      <ToggleButton
+        disabled={!value}
+        testid="statsModeBtn"
+        value={Mode.stats}
+        title="Статистика"
+      >
         <AssessmentIcon />
       </ToggleButton>
       <ToggleButton
+        disabled={!value}
         testid="replaceModeBtn"
         value={Mode.replace}
         title="Замена слов"

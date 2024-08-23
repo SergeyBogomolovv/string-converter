@@ -2,10 +2,16 @@ import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
-import { selectEditMode, setEditMode } from "@/entities/editor";
+import {
+  selectEditMode,
+  selectEditorValue,
+  setEditMode,
+} from "@/entities/editor";
 
 export const EditModeToggle = () => {
   const editMode = useAppSelector(selectEditMode);
+  const value = useAppSelector(selectEditorValue);
+
   const dispatch = useAppDispatch();
   function clickhandler() {
     if (editMode) {
@@ -17,6 +23,7 @@ export const EditModeToggle = () => {
 
   return (
     <Button
+      disabled={!value}
       data-testid="editmodetoggleel"
       startIcon={editMode ? <SaveIcon /> : <EditIcon />}
       variant="contained"

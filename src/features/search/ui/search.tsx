@@ -17,7 +17,7 @@ export const Search = () => {
         alignItems: "center",
       }}
     >
-      <IconButton sx={{ p: "10px" }} aria-label="search">
+      <IconButton disabled={editMode} sx={{ p: "10px" }} aria-label="search">
         <SearchIcon />
       </IconButton>
       <InputBase
