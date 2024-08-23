@@ -26,6 +26,7 @@ describe("Stats component", () => {
         editMode: false,
         searchTarget: "",
         mode: Mode.generate,
+        undoList: [],
       },
       stats: {
         showWordsCount: 3,

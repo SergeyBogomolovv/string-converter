@@ -9,6 +9,7 @@ describe("Mode select component", () => {
     const { getByTestId, store } = renderWithRedux(<Toolbar />, {
       preloadedState: {
         editor: {
+          undoList: [],
           value: "some value",
           editMode: true,
           mode: Mode.none,

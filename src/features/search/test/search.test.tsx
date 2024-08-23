@@ -22,6 +22,7 @@ describe("Search input", () => {
         value: "some test value",
         editMode: false,
         mode: Mode.sort,
+        undoList: [],
       },
     };
 

@@ -12,6 +12,7 @@ describe("TextContent component", () => {
   it("should highlight correctly", () => {
     const preloadedState: { editor: EditorState } = {
       editor: {
+        undoList: [],
         searchTarget: "return",
         value: "mockreturnvalue",
         editMode: false,

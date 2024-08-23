@@ -15,6 +15,7 @@ describe("EditModeToggle", () => {
     const { getByTestId, store } = renderWithRedux(<EditModeToggle />, {
       preloadedState: {
         editor: {
+          undoList: [],
           value: "some value",
           editMode: true,
           mode: Mode.none,

@@ -14,6 +14,7 @@ export interface EditorState {
   searchTarget: string;
   editMode: boolean;
   mode: Mode;
+  undoList: string[];
 }
 
 export const initialState: EditorState = {
@@ -21,6 +22,7 @@ export const initialState: EditorState = {
   searchTarget: "",
   editMode: true,
   mode: Mode.none,
+  undoList: [],
 };
 
 export const editorSlice = createSlice({
@@ -28,6 +30,7 @@ export const editorSlice = createSlice({
   initialState,
   reducers: {
     setValue: (state, action: PayloadAction<string>) => {
+      state.undoList.push(state.value);
       state.value = action.payload;
     },
 
