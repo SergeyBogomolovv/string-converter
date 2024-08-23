@@ -23,7 +23,7 @@ export const EditModeToggle = () => {
 
   return (
     <Button
-      disabled={!value}
+      disabled={!value && editMode}
       data-testid="editmodetoggleel"
       startIcon={editMode ? <SaveIcon /> : <EditIcon />}
       variant="contained"
