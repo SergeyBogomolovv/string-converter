@@ -1,6 +1,7 @@
 import { selectMode, Mode as ModeEnum } from "@/entities/editor";
 import { Generator } from "@/features/generator";
 import { Replace } from "@/features/replace";
+import { Sort } from "@/features/sort";
 import { Stats } from "@/features/stats";
 import { useAppSelector } from "@/shared/store/hooks";
 import { Skeleton } from "@mui/material";
@@ -13,7 +14,7 @@ export const Mode = () => {
     <Suspense fallback={<Skeleton variant="rounded" height={118} />}>
       {mode === ModeEnum.generate && <Generator />}
       {mode === ModeEnum.replace && <Replace />}
-      {mode === ModeEnum.sort && <div></div>}
+      {mode === ModeEnum.sort && <Sort />}
       {mode === ModeEnum.stats && <Stats />}
     </Suspense>
   );
