@@ -4,6 +4,7 @@ export {
   setEditMode,
   setSearchTarget,
   setMode,
+  undo,
 } from "./model/slice";
 
 export {

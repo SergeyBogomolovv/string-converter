@@ -1,4 +1,4 @@
-import { selectEditorValue, setValue } from "@/entities/editor";
+import { selectEditorValue, setValue, undo } from "@/entities/editor";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -78,9 +78,15 @@ export const useTextArea = (
             adjustTextareaHeight();
           });
         }
+      } else if (
+        (event.ctrlKey && event.key === "z") ||
+        (event.metaKey && event.key === "z")
+      ) {
+        event.preventDefault();
+        dispatch(undo());
       }
     },
-    [adjustTextareaHeight]
+    [adjustTextareaHeight, dispatch]
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
