@@ -1,9 +1,17 @@
-export { default, setValue, setEditMode, setSearchTarget } from "./model/slice";
+export {
+  default,
+  setValue,
+  setEditMode,
+  setSearchTarget,
+  setMode,
+} from "./model/slice";
 
 export {
   selectEditMode,
   selectEditorValue,
   selectSearchTarget,
+  selectMode,
 } from "./model/selectors";
 
 export type { EditorState } from "./model/slice";
+export { Mode } from "./model/slice";

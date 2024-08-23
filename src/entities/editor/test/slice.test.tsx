@@ -4,6 +4,7 @@ import {
   setSearchTarget,
   setEditMode,
   initialState,
+  Mode,
 } from "../model/slice";
 
 describe("editorSlice", () => {
@@ -28,5 +29,11 @@ describe("editorSlice", () => {
     const action = { type: setSearchTarget.type, payload: "поисковая фраза" };
     const state = editorSlice.reducer(initialState, action);
     expect(state.searchTarget).toEqual("поисковая фраза");
+  });
+
+  it("should change mode", () => {
+    const action = { type: setSearchTarget.type, payload: Mode.replace };
+    const state = editorSlice.reducer(initialState, action);
+    expect(state.searchTarget).toEqual(Mode.replace);
   });
 });

@@ -1,16 +1,16 @@
 import { renderWithRedux } from "@/shared/store";
-import { SearchInput } from "../ui/search-input";
-import { EditorState } from "@/entities/editor";
+import { Search } from "../ui/search";
+import { EditorState, Mode } from "@/entities/editor";
 import { fireEvent } from "@testing-library/react";
 
 describe("Search input", () => {
   it("should render correctly", () => {
-    const { getByTestId } = renderWithRedux(<SearchInput />);
+    const { getByTestId } = renderWithRedux(<Search />);
     expect(getByTestId("search-inputel")).toBeInTheDocument();
   });
 
   it("should be disabled during editMode", () => {
-    const { getByTestId } = renderWithRedux(<SearchInput />);
+    const { getByTestId } = renderWithRedux(<Search />);
     expect(getByTestId("search-inputel")).toBeDisabled();
   });
 
@@ -20,10 +20,11 @@ describe("Search input", () => {
         searchTarget: "",
         value: "some test value",
         editMode: false,
+        mode: Mode.sort,
       },
     };
 
-    const { getByTestId, store } = renderWithRedux(<SearchInput />, {
+    const { getByTestId, store } = renderWithRedux(<Search />, {
       preloadedState,
     });
 

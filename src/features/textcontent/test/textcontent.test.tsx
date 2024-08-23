@@ -1,4 +1,4 @@
-import { EditorState } from "@/entities/editor";
+import { EditorState, Mode } from "@/entities/editor";
 import { Textcontent } from "../ui/textcontent";
 import { renderWithRedux } from "@/shared/store";
 
@@ -15,6 +15,7 @@ describe("TextContent component", () => {
         searchTarget: "return",
         value: "mockreturnvalue",
         editMode: false,
+        mode: Mode.generate,
       },
     };
 
