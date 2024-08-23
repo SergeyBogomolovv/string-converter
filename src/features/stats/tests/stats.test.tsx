@@ -2,6 +2,7 @@ import { renderWithRedux } from "@/shared/store";
 import { StatsState } from "../model/slice";
 import Stats from "../ui/stats";
 import { EditorState, Mode } from "@/entities/editor";
+import { act } from "react";
 
 describe("Stats component", () => {
   let preloadedState: { stats: StatsState; editor: EditorState };
@@ -18,6 +19,14 @@ describe("Stats component", () => {
       count: 2,
     },
   ];
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
 
   beforeEach(() => {
     preloadedState = {
@@ -39,23 +48,29 @@ describe("Stats component", () => {
     };
   });
 
-  it("should render correctly", () => {
-    const { getByTestId, getAllByTestId } = renderWithRedux(<Stats />, {
-      preloadedState,
-    });
+  it("should render correctly", async () => {
+    const { getByTestId, findAllByTestId } = await act(() =>
+      renderWithRedux(<Stats />, {
+        preloadedState,
+      })
+    );
 
     const container = getByTestId("mostusedwordscontainerel");
-    const cards = getAllByTestId("statcardel");
+    const cards = await findAllByTestId("statcardel");
+
+    await jest.advanceTimersByTimeAsync(200);
 
     expect(container).toBeInTheDocument();
     expect(cards).toHaveLength(3);
   });
 
-  it("should set most used words correctly", () => {
-    const { store } = renderWithRedux(<Stats />, {
-      preloadedState,
-    });
-
+  it("should set most used words correctly", async () => {
+    const { store } = await act(() =>
+      renderWithRedux(<Stats />, {
+        preloadedState,
+      })
+    );
+    await jest.advanceTimersByTimeAsync(200);
     expect(store.getState().stats.stats.mostUsedWords).toEqual(
       expectedMostUsedWordsCount
     );

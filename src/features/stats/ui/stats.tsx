@@ -3,27 +3,35 @@ import { WordsCount } from "./words-count";
 import { MostUsedWords } from "./most-used-words";
 import { useAppDispatch, useAppSelector } from "@/shared/store/hooks";
 import { setStats } from "../model/slice";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { textCounter } from "@/shared/utils/textcounter";
 import { selectShowWordsCount } from "../model/selectors";
 import { selectEditorValue } from "@/entities/editor";
+import { debouncer } from "@/shared/utils/debouncer";
 
 const Stats = () => {
   const showWordsCount = useAppSelector(selectShowWordsCount);
 
-  const count = textCounter({
-    mostUsedWords: showWordsCount,
-    wordsCount: true,
-    charsCount: true,
-  });
+  const count = useCallback(
+    textCounter({
+      mostUsedWords: showWordsCount,
+      wordsCount: true,
+      charsCount: true,
+    }),
+    [showWordsCount]
+  );
 
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectEditorValue);
 
-  //TODO: debounce
+  const debouncedSetStats = useCallback(
+    debouncer((value: string) => dispatch(setStats(count(value))), 200),
+    [count, dispatch]
+  );
+
   useEffect(() => {
-    dispatch(setStats(count(value)));
-  }, [value, count]);
+    debouncedSetStats(value);
+  }, [value, debouncedSetStats]);
 
   return (
     <Stack spacing={2}>

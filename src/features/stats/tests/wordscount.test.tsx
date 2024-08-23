@@ -16,19 +16,23 @@ describe("Most used words Count", () => {
     };
   });
 
-  it("should correctly show count", () => {
-    const { getByTestId } = renderWithRedux(<WordsCount />, {
-      preloadedState,
-    });
+  it("should correctly show count", async () => {
+    const { getByTestId } = await act(() =>
+      renderWithRedux(<WordsCount />, {
+        preloadedState,
+      })
+    );
     expect(Number(getByTestId("showwordscountel").textContent)).toBe(
       preloadedState.stats.showWordsCount
     );
   });
 
   it("should correctly increase count", async () => {
-    const { getByTestId, store } = renderWithRedux(<WordsCount />, {
-      preloadedState,
-    });
+    const { getByTestId, store } = await act(() =>
+      renderWithRedux(<WordsCount />, {
+        preloadedState,
+      })
+    );
     const button = getByTestId("showwordscountincreaseel");
 
     await act(async () => fireEvent.click(button));
@@ -39,9 +43,12 @@ describe("Most used words Count", () => {
   });
 
   it("should correctly decrease count", async () => {
-    const { getByTestId, store } = renderWithRedux(<WordsCount />, {
-      preloadedState,
-    });
+    const { getByTestId, store } = await act(() =>
+      renderWithRedux(<WordsCount />, {
+        preloadedState,
+      })
+    );
+
     const button = getByTestId("showwordscountdecreaseel");
 
     await act(async () => fireEvent.click(button));
