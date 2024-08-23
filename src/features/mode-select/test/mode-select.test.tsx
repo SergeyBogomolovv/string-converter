@@ -6,7 +6,16 @@ import { act } from "react";
 
 describe("Mode select component", () => {
   it("should change mode", async () => {
-    const { getByTestId, store } = renderWithRedux(<Toolbar />);
+    const { getByTestId, store } = renderWithRedux(<Toolbar />, {
+      preloadedState: {
+        editor: {
+          value: "some value",
+          editMode: true,
+          mode: Mode.none,
+          searchTarget: "",
+        },
+      },
+    });
     const statsModeBtn = getByTestId("statsModeBtn");
     const replaceModeBtn = getByTestId("replaceModeBtn");
     const generateModeBtn = getByTestId("generateModeBtn");
